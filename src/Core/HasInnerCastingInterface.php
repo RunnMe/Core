@@ -3,7 +3,7 @@
 namespace Runn\Core;
 
 /**
- * Blank interface for objects have inner casting their elements
+ * Blank interface for objects have inner casting for their elements
  *
  * Interface HasInnerCastingInterface
  * @package Runn\Core
@@ -11,5 +11,4 @@ namespace Runn\Core;
  * @codeCoverageIgnore
  */
 interface HasInnerCastingInterface
-{
-}
+{}
