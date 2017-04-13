@@ -22,6 +22,17 @@ class TypedCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((object)['bar' => 2], $collection[1]);
     }
 
+    public function testGetType()
+    {
+        $collection = new class(['type' => (object)['value' => 42]])
+            extends TypedCollection {
+            public static function getType() { return \stdClass::class;}
+        };
+
+        $this->assertSame(\stdClass::class, $collection->getType());
+        $this->assertSame(42, $collection['type']->value);
+    }
+
     /**
      * @expectedException \Runn\Core\Exception
      * @expectedExceptionMessage Typed collection type mismatch
