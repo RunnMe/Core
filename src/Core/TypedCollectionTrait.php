@@ -22,7 +22,7 @@ trait TypedCollectionTrait
     {
         $type = static::getType();
 
-        if (class_exists($type)) {
+        if (class_exists($type) || interface_exists($type)) {
             return ($value instanceof $type);
         }
 
@@ -31,7 +31,6 @@ trait TypedCollectionTrait
                 if ('bool' == $type || 'boolean' == $type) {
                     return true;
                 }
-                break;
             default:
                 $typeChecker = 'is_' . $type;
                 if (function_exists($typeChecker)) {

@@ -45,6 +45,16 @@ class testBoolClass
     }
 }
 
+class testIncorrectTypeClass
+    implements TypedCollectionInterface
+{
+    use TypedCollectionTrait;
+    public static function getType()
+    {
+        return 'foo';
+    }
+}
+
 class testValueClass
 {
     protected $data;
@@ -200,6 +210,16 @@ class TypedCollectionTraitTest extends \PHPUnit_Framework_TestCase
 
         $collection[] = false;
         $this->assertCount(5, $collection);
+    }
+
+    /**
+     * @expectedException \Runn\Core\Exception
+     * @expectedExceptionMessage Typed collection type mismatch
+     */
+    public function testIncorrectTypeClass()
+    {
+        $collection = new testIncorrectTypeClass();
+        $collection->append(42);
     }
 
 }
