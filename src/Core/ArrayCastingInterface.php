@@ -13,9 +13,9 @@ namespace Runn\Core;
 interface ArrayCastingInterface
 {
 
-    public function fromArray(/* iterable */$data);
+    public function fromArray(iterable $data);
 
-    public function merge(/* iterable */$data);
+    public function merge(iterable $data);
 
     public function toArray(): array;
 

@@ -16,7 +16,7 @@ abstract class TypedCollection
     /**
      * @param iterable|null $data
      */
-    public function __construct(/* iterable */$data = null)
+    public function __construct(iterable $data = null)
     {
         if (null !== $data) {
             $this->fromArray($data);

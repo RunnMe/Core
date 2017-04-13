@@ -22,9 +22,9 @@ interface CollectionInterface
     public function first();
     public function last();
 
-    public function existsElementByAttributes(array /* iterable */ $attributes);
-    public function findAllByAttributes(array /* iterable */ $attributes);
-    public function findByAttributes(array /* iterable */ $attributes);
+    public function existsElementByAttributes(iterable $attributes);
+    public function findAllByAttributes(iterable $attributes);
+    public function findByAttributes(iterable $attributes);
 
     public function asort();
     public function ksort();

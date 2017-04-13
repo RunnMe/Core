@@ -209,7 +209,7 @@ trait ObjectAsArrayTrait
      * @param iterable $data
      * @return $this
      */
-    public function fromArray(/* iterable */ $data)
+    public function fromArray(iterable $data)
     {
         $this->__data = [];
         $this->merge($data);
@@ -220,7 +220,7 @@ trait ObjectAsArrayTrait
      * @param iterable $data
      * @return $this
      */
-    public function merge(/* iterable */$data)
+    public function merge(iterable $data)
     {
         if ($data instanceof ArrayCastingInterface) {
             $data = $data->toArray();

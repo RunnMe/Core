@@ -43,7 +43,7 @@ trait CollectionTrait
      * @param iterable $data
      * @return $this
      */
-    public function merge(/* iterable */$data)
+    public function merge(iterable $data)
     {
         if ($data instanceof ArrayCastingInterface) {
             $data = $data->toArray();
@@ -128,7 +128,7 @@ trait CollectionTrait
      * @param array $attributes
      * @return bool
      */
-    public function existsElementByAttributes(array /* iterable */ $attributes)
+    public function existsElementByAttributes(iterable $attributes)
     {
         if (empty($attributes)) {
             return false;
@@ -139,8 +139,11 @@ trait CollectionTrait
                 continue;
             }
             foreach ($element as $key => $val) {
-                if (array_key_exists($key, $attributes))
-                    $elementAttributes[$key] = $val;
+                foreach ($attributes as $attrkey => $attribute) {
+                    if ($attrkey == $key) {
+                        $elementAttributes[$key] = $val;
+                    }
+                }
             }
             if ($attributes == $elementAttributes)
                 return true;
@@ -152,7 +155,7 @@ trait CollectionTrait
      * @param array $attributes
      * @return static
      */
-    public function findAllByAttributes(array /* iterable */ $attributes)
+    public function findAllByAttributes(iterable $attributes)
     {
         return $this->filter(function ($x) use ($attributes) {
             if (!is_array($x) && !(is_object($x) && $x instanceof \Traversable)) {
@@ -160,8 +163,10 @@ trait CollectionTrait
             }
             $elementAttributes = [];
             foreach ($x as $key => $value) {
-                if (array_key_exists($key, $attributes)) {
-                    $elementAttributes[$key] = $value;
+                foreach ($attributes as $attrkey => $attribute) {
+                    if ($attrkey == $key) {
+                        $elementAttributes[$key] = $value;
+                    }
                 }
             }
             return $elementAttributes == $attributes;
@@ -172,7 +177,7 @@ trait CollectionTrait
      * @param array $attributes
      * @return mixed|null
      */
-    public function findByAttributes(array /* iterable */ $attributes)
+    public function findByAttributes(iterable $attributes)
     {
         $all = $this->findAllByAttributes($attributes);
         return $all->isEmpty() ? null : $all[0];

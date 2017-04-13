@@ -61,7 +61,7 @@ class Std
      * @param iterable|null $data
      * @throws \Runn\Core\Exceptions
      */
-    public function __construct(/* iterable */ $data = null)
+    public function __construct(iterable $data = null)
     {
         $errors = new Exceptions();
 
