@@ -125,7 +125,7 @@ trait CollectionTrait
     }
 
     /**
-     * @param array $attributes
+     * @param iterable $attributes
      * @return bool
      */
     public function existsElementByAttributes(iterable $attributes)
@@ -152,7 +152,7 @@ trait CollectionTrait
     }
 
     /**
-     * @param array $attributes
+     * @param iterable $attributes
      * @return static
      */
     public function findAllByAttributes(iterable $attributes)
@@ -174,7 +174,7 @@ trait CollectionTrait
     }
 
     /**
-     * @param array $attributes
+     * @param iterable $attributes
      * @return mixed|null
      */
     public function findByAttributes(iterable $attributes)
