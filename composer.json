@@ -1,0 +1,31 @@
+{
+  "name": "runn/core",
+  "description": "Runn Me! Core Library",
+  "keywords": ["runn", "runn.me", "framework", "std", "collection", "multiexception"],
+  "type": "library",
+  "license": "LGPL v.3",
+  "authors": [
+    {
+      "name": "Albert Stepantsev"
+    },
+    {
+      "name": "Maxim Fedorov",
+      "email": "scorp7mix@gmail.com"
+    },
+    {
+      "name": "Dmitriy Makarov",
+      "email": "ru.damakarov@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Runn\\": "src/"
+    }
+  }
+}

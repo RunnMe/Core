@@ -1,0 +1,13 @@
+language: php
+php:
+  - '7.0'
+  - '7.1'
+  - nightly
+
+install:
+  - composer install
+
+script: ./vendor/bin/phpunit --configuration ./tests/phpunit.xml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
