@@ -67,8 +67,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $obj = new Config();
 
-        // @todo: uncomment in 7.1 !
-        //$this->assertNull($obj->getStorage());
+        $this->assertNull($obj->getStorage());
 
         $file = new FakeStorage();
         $obj->setStorage($file);
@@ -81,14 +80,12 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $obj = new Config();
 
         $this->assertNull($obj->storage);
-        // @todo: uncomment in 7.1 !
-        //$this->assertNull($obj->getStorage());
+        $this->assertNull($obj->getStorage());
 
         $obj->storage = 'test.txt';
 
         $this->assertEquals('test.txt', $obj->storage);
-        // @todo: uncomment in 7.1 !
-        //$this->assertNull($obj->getStorage());
+        $this->assertNull($obj->getStorage());
 
         $obj->setStorage(new FakeStorage());
 
