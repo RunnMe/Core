@@ -34,10 +34,10 @@ class Config
     }
 
     /**
-     * @param \Runn\Storages\SingleValueStorageInterface $storage
+     * @param \Runn\Storages\SingleValueStorageInterface|null $storage
      * @return $this
      */
-    public function setStorage(/*?*/SingleValueStorageInterface $storage)
+    public function setStorage(?SingleValueStorageInterface $storage)
     {
         $this->storage = $storage;
         return $this;
@@ -46,7 +46,7 @@ class Config
     /**
      * @return \Runn\Storages\SingleValueStorageInterface|null
      */
-    public function getStorage(): /*?*/SingleValueStorageInterface
+    public function getStorage(): ?SingleValueStorageInterface
     {
         return $this->storage;
     }
