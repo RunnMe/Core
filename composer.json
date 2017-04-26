@@ -15,6 +15,10 @@
     {
       "name": "Dmitriy Makarov",
       "email": "ru.damakarov@gmail.com"
+    },
+    {
+      "name": "Dmitry Karasev",
+      "email": "karasev.dmitry@gmail.com"
     }
   ],
   "require": {
