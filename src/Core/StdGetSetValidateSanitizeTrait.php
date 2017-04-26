@@ -71,7 +71,7 @@ trait StdGetSetValidateSanitizeTrait
                 $val = $this->$sanitizeMethod($val);
             }
 
-            if ('' == $key) {
+            if (null === $key) {
                 $this->__data[] = $val;
             } else {
                 $this->__data[$key] = $val;

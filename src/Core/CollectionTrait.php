@@ -54,7 +54,7 @@ trait CollectionTrait
                 $value = $this->innerCast($key, $value);
             }
             if (is_int($key) && $this->innerIsSet($key)) {
-                $this->innerSet('', $value);
+                $this->innerSet(null, $value);
             } else {
                 $this->innerSet($key, $value);
             }

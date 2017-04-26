@@ -51,7 +51,7 @@ trait ObjectAsArrayTrait
         if (method_exists($this, $setMethod)) {
             $this->$setMethod($val);
         } else {
-            if ('' == $key) {
+            if (null === $key) {
                 $this->__data[] = $val;
             } else {
                 $this->__data[$key] = $val;
