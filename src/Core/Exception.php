@@ -14,7 +14,7 @@ class Exception
     implements \JsonSerializable
 {
 
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return ['code' => $this->getCode(), 'message' => $this->getMessage()];
     }

@@ -36,4 +36,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new Collection([400, 500]), $collection[3]);
     }
 
+    public function testConstructWithZeroKey()
+    {
+        $collection = new Collection([1 => '1', 0 => '0', 2 => '2']);
+        $this->assertCount(3, $collection);
+        $this->assertSame([1 => '1', 0 => '0', 2 => '2'], $collection->values());
+    }
+
 }

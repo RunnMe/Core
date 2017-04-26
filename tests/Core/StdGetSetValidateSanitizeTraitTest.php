@@ -36,6 +36,20 @@ class testClass
 class StdGetSetValidateSanitizeTraitTest extends \PHPUnit_Framework_TestCase
 {
 
+    public function testNullKey()
+    {
+        $obj = new testClass();
+
+        $obj[] = '1';
+        $this->assertCount(1, $obj);
+        $this->assertSame('1', $obj[0]);
+
+        $obj[2] = '2';
+        $this->assertCount(2, $obj);
+        $this->assertSame('1', $obj[0]);
+        $this->assertSame('2', $obj[2]);
+    }
+
     public function testSimpleExceptionFromArray()
     {
         try {
