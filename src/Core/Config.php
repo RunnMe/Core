@@ -21,6 +21,9 @@ class Config
      */
     protected $storage;
 
+    protected $__notgetters = ['storage'];
+    protected $__notsetters = ['storage'];
+
     /**
      * @param \Runn\Storages\SingleValueStorageInterface|iterable|null $arg
      */
@@ -90,23 +93,6 @@ class Config
     public function set($value)
     {
         throw new \BadMethodCallException();
-    }
-
-    protected function innerSet($key, $val)
-    {
-        if ('storage' === $key) {
-            $this->__data['storage'] = $val;
-            return;
-        }
-        parent::innerSet($key, $val);
-    }
-
-    protected function innerGet($key)
-    {
-        if ('storage' === $key) {
-            return $this->__data['storage'] ?? null;
-        }
-        return parent::innerGet($key);
     }
 
 }

@@ -15,6 +15,8 @@ class testClass
 {
     use StdGetSetValidateSanitizeTrait;
 
+    protected $__notsetters = ['bla1'];
+
     protected function validateFoo()
     {
         throw new Exception('Invalid foo');
@@ -30,6 +32,13 @@ class testClass
     {
         yield new Exception('Invalid baz 1');
         yield new Exception('Invalid baz 2');
+    }
+
+    public function setBla1($val) {
+        $this->__data['bla1'] = '!!!';
+    }
+    public function setBla2($val) {
+        $this->__data['bla2'] = '!!!';
     }
 }
 
@@ -48,6 +57,17 @@ class StdGetSetValidateSanitizeTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $obj);
         $this->assertSame('1', $obj[0]);
         $this->assertSame('2', $obj[2]);
+    }
+
+    public function testNotSetters()
+    {
+        $obj = new testClass();
+
+        $obj->bla1 = 'test1';
+        $this->assertSame('test1', $obj->bla1);
+
+        $obj->bla2 = 'test2';
+        $this->assertSame('!!!', $obj->bla2);
     }
 
     public function testSimpleExceptionFromArray()

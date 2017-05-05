@@ -34,7 +34,7 @@ trait StdGetSetValidateSanitizeTrait
     protected function innerSet($key, $val)
     {
         $setMethod = 'set' . ucfirst($key);
-        if (method_exists($this, $setMethod)) {
+        if ( !in_array($key, $this->__notsetters ?? []) && method_exists($this, $setMethod) ) {
             $this->$setMethod($val);
         } else {
 
