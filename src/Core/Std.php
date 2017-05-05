@@ -12,9 +12,8 @@ class Std
     implements ObjectAsArrayInterface, StdGetSetInterface, HasInnerValidationInterface, HasInnerSanitizationInterface, HasRequiredInterface
 {
 
-    use StdGetSetValidateSanitizeTrait {
-        innerGet as protected traitInnerGet;
-    }
+    use StdGetSetValidateSanitizeTrait;
+    protected $__notgetters = ['requiredKeys'];
 
     /**
      * @var array
@@ -27,14 +26,6 @@ class Std
     public static function getRequiredKeys(): array
     {
         return static::$required;
-    }
-
-    protected function innerGet($key)
-    {
-        if ('requiredKeys' === $key) {
-            return $this->__data[$key];
-        }
-        return $this->traitInnerGet($key);
     }
 
     /**
