@@ -41,7 +41,7 @@ class Std
                 $errors->add(new Exception('Required property "' . $required . '" is missing'));
             }
         }
-        if (!$errors->isEmpty()) {
+        if (!$errors->empty()) {
             throw $errors;
         }
         return true;
@@ -68,7 +68,7 @@ class Std
             $errors->add($e);
         }
 
-        if (!$errors->isEmpty()) {
+        if (!$errors->empty()) {
             throw $errors;
         }
     }

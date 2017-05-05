@@ -31,7 +31,7 @@ interface ObjectAsArrayInterface
      * Otherwise returns false
      * @return bool
      */
-    public function isEmpty(): bool;
+    public function empty(): bool;
 
     /**
      * Returns true if the same (===) element exists in this object-as-array

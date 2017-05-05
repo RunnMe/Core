@@ -1,6 +1,7 @@
 7.0.2, 7.1.2, 7.2.2
 ===================
 * \#3 $__notgetters and $__notsetters properties are added in ObjectAsArray for getters and setters ignore
+* ObjectAsArrayInterface::isEmpty() method is renamed to empty()
 
 7.0.1, 7.1.1, 7.2.1
 ===================

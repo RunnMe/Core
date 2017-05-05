@@ -101,13 +101,13 @@ class ObjectAsArrayTraitTest extends \PHPUnit_Framework_TestCase
     public function testIsEmpty()
     {
         $obj = new testClass();
-        $this->assertTrue($obj->isEmpty());
+        $this->assertTrue($obj->empty());
 
         $obj[0] = 1;
-        $this->assertFalse($obj->isEmpty());
+        $this->assertFalse($obj->empty());
 
         unset($obj[0]);
-        $this->assertTrue($obj->isEmpty());
+        $this->assertTrue($obj->empty());
     }
 
     public function testExistsSame()

@@ -99,7 +99,7 @@ trait ObjectAsArrayTrait
      * Otherwise returns false
      * @return bool
      */
-    public function isEmpty(): bool
+    public function empty(): bool
     {
         return empty($this->__data);
     }

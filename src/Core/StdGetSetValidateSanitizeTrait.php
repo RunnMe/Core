@@ -60,7 +60,7 @@ trait StdGetSetValidateSanitizeTrait
                     $errors->add($e);
                 }
 
-                if (!$errors->isEmpty()) {
+                if (!$errors->empty()) {
                     throw $errors;
                 }
 
@@ -103,7 +103,7 @@ trait StdGetSetValidateSanitizeTrait
             }
         }
 
-        if (!$errors->isEmpty()) {
+        if (!$errors->empty()) {
             throw $errors;
         }
 
