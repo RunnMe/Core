@@ -1,5 +1,6 @@
 7.0.2, 7.1.2, 7.2.2
 ===================
+* Добавлен интерфейс InstanceableInterface и его эталонная реализация InstanceableTrait
 * \#3 В ObjectAsArray добавлены свойства $__notgetters и $__notsetters и их использования для игнорирования геттеров и сеттеров
 * Метод ObjectAsArrayInterface::isEmpty() переименован в empty()
 

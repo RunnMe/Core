@@ -1,5 +1,6 @@
 7.0.2, 7.1.2, 7.2.2
 ===================
+* InstanceableInterface and its implementation by InstanceableTrait are added
 * \#3 $__notgetters and $__notsetters properties are added in ObjectAsArray for getters and setters ignore
 * ObjectAsArrayInterface::isEmpty() method is renamed to empty()
 

@@ -14,9 +14,8 @@ interface InstanceableInterface
 {
 
     /**
-     * @param array $args
      * @return static
      */
-    public static function instance(...$args);
+    public static function instance();
 
 }
