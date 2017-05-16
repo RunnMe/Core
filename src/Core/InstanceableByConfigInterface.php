@@ -11,13 +11,13 @@ namespace Runn\Core;
  * @codeCoverageIgnore
  */
 interface InstanceableByConfigInterface
-    extends ConfigAwareInterface/* @todo InstanceableInterface */
+    extends InstanceableInterface
 {
 
     /**
      * @param \Runn\Core\Config|null $config
      * @return static
      */
-    public static function instance(/*?*/Config $config);
+    public static function instance(Config $config = null);
 
 }
