@@ -11,6 +11,9 @@ namespace Runn\Core;
 trait ConfigAwareTrait
 {
 
+    /**
+     * @var \Runn\Core\Config|null
+     */
     protected $config;
 
     /**
