@@ -36,7 +36,7 @@ trait HasSchemaTrait
             if (!empty($def['class'])) {
                 $class = $def['class'];
                 unset($def['class']);
-                $data[$key] = new $class(...$def);
+                $data[$key] = new $class(...array_values($def));
             } else {
                 $data[$key] = $def;
             }
