@@ -23,6 +23,7 @@ trait ConfigAwareTrait
     public function setConfig(/*?*/Config $config)
     {
         $this->config = $config;
+        return $this;
     }
 
     /**

@@ -17,8 +17,9 @@ class ConfigAwareTraitTest extends \PHPUnit_Framework_TestCase
 
         $config = new Config(['foo' => 'bar']);
 
-        $obj->setConfig($config);
+        $ret = $obj->setConfig($config);
         $this->assertSame($config, $obj->getConfig());
+        $this->assertSame($obj, $ret);
     }
 
 }
