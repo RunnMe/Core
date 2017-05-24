@@ -180,7 +180,7 @@ trait CollectionTrait
     public function findByAttributes(iterable $attributes)
     {
         $all = $this->findAllByAttributes($attributes);
-        return $all->isEmpty() ? null : $all[0];
+        return $all->empty() ? null : $all[0];
     }
 
     /**

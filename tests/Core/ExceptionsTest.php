@@ -24,7 +24,7 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
             CollectionInterface::class,
             $errors
         );
-        $this->assertTrue($errors->isEmpty());
+        $this->assertTrue($errors->empty());
     }
 
     public function testConstructValid()
@@ -50,14 +50,14 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
     public function testAppend()
     {
         $errors = new Exceptions;
-        $this->assertTrue($errors->isEmpty());
+        $this->assertTrue($errors->empty());
 
         $errors->append(new Exception('First'));
-        $this->assertFalse($errors->isEmpty());
+        $this->assertFalse($errors->empty());
         $this->assertEquals(1, $errors->count());
 
         $errors->append(new Exception('Second'));
-        $this->assertFalse($errors->isEmpty());
+        $this->assertFalse($errors->empty());
         $this->assertEquals(2, $errors->count());
 
         $this->assertEquals(
@@ -69,14 +69,14 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
     public function testPrepend()
     {
         $errors = new Exceptions;
-        $this->assertTrue($errors->isEmpty());
+        $this->assertTrue($errors->empty());
 
         $errors->prepend(new Exception('First'));
-        $this->assertFalse($errors->isEmpty());
+        $this->assertFalse($errors->empty());
         $this->assertEquals(1, $errors->count());
 
         $errors->prepend(new Exception('Second'));
-        $this->assertFalse($errors->isEmpty());
+        $this->assertFalse($errors->empty());
         $this->assertEquals(2, $errors->count());
 
         $this->assertEquals(
@@ -88,14 +88,14 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
     public function testAdd()
     {
         $errors = new Exceptions;
-        $this->assertTrue($errors->isEmpty());
+        $this->assertTrue($errors->empty());
 
         $errors->add(new Exception('First'));
-        $this->assertFalse($errors->isEmpty());
+        $this->assertFalse($errors->empty());
         $this->assertEquals(1, $errors->count());
 
         $errors->add(new Exception('Second'));
-        $this->assertFalse($errors->isEmpty());
+        $this->assertFalse($errors->empty());
         $this->assertEquals(2, $errors->count());
 
         $this->assertInstanceOf(
@@ -113,10 +113,10 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
     public function testAddSelf()
     {
         $errors = new Exceptions;
-        $this->assertTrue($errors->isEmpty());
+        $this->assertTrue($errors->empty());
 
         $errors->add(new Exception('First'));
-        $this->assertFalse($errors->isEmpty());
+        $this->assertFalse($errors->empty());
         $this->assertEquals(1, $errors->count());
 
         $merged = new Exceptions;
@@ -188,7 +188,7 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
             $errors->add(new Exception('Bar'));
             $errors->add(new Exception('Baz'));
 
-            if (!$errors->isEmpty()) {
+            if (!$errors->empty()) {
                 throw $errors;
             }
 

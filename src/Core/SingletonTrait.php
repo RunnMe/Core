@@ -3,6 +3,8 @@
 namespace Runn\Core;
 
 /**
+ * Simplest SingletonInterface implementation
+ *
  * Trait SingletonTrait
  * @package Runn\Core
  *

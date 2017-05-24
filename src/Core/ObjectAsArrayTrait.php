@@ -22,13 +22,22 @@ trait ObjectAsArrayTrait
     /** @var array $__data */
     protected $__data = [];
 
+    /** @var array $__notgetters */
+    /** @var array $__notsetters */
+    // @todo: uncomment in future PHP versions
+    //protected $__notgetters = [];
+    //protected $__notsetters = [];
+
     /*
      * Data access protected methods
      */
 
     protected function innerIsSet($key)
     {
-        return array_key_exists($key, $this->__data) || method_exists($this, 'get' . ucfirst($key));
+        return
+            array_key_exists($key, $this->__data)
+            ||
+            ( !in_array($key, $this->__notgetters ?? []) && method_exists($this, 'get' . ucfirst($key)) ) ;
     }
 
     protected function innerUnSet($key)
@@ -39,7 +48,7 @@ trait ObjectAsArrayTrait
     protected function innerGet($key)
     {
         $method = 'get' . ucfirst($key);
-        if (method_exists($this, $method)) {
+        if ( !in_array($key, $this->__notgetters ?? []) && method_exists($this, $method) ) {
             return $this->$method();
         }
         return isset($this->__data[$key]) ? $this->__data[$key] : null;
@@ -47,9 +56,9 @@ trait ObjectAsArrayTrait
 
     protected function innerSet($key, $val)
     {
-        $setMethod = 'set' . ucfirst($key);
-        if (method_exists($this, $setMethod)) {
-            $this->$setMethod($val);
+        $method = 'set' . ucfirst($key);
+        if ( !in_array($key, $this->__notsetters ?? []) && method_exists($this, $method) ) {
+            $this->$method($val);
         } else {
             if (null === $key) {
                 $this->__data[] = $val;
@@ -90,7 +99,7 @@ trait ObjectAsArrayTrait
      * Otherwise returns false
      * @return bool
      */
-    public function isEmpty(): bool
+    public function empty(): bool
     {
         return empty($this->__data);
     }
@@ -189,7 +198,7 @@ trait ObjectAsArrayTrait
      */
     protected function needCasting($key, $value): bool
     {
-        if (is_null($value) || is_scalar($value) || $value instanceof \Closure || $value instanceof ObjectAsArrayInterface) {
+        if (is_null($value) || is_scalar($value) || is_object($value)) {
             return false;
         }
         return true;
