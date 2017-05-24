@@ -15,9 +15,9 @@ trait TypedCollectionTrait
     use CollectionTrait {
         append as protected collectionAppend;
         prepend as protected collectionPrepend;
-        innerGet as protected collectionInnerGet;
         innerSet as protected collectionInnerSet;
     }
+    protected $__notgetters = ['type'];
 
     protected function isValueTypeValid($value): bool
     {
@@ -58,14 +58,6 @@ trait TypedCollectionTrait
     {
         $this->checkValueType($value);
         return $this->collectionPrepend($value);
-    }
-
-    public function innerGet($key)
-    {
-        if ('type' === $key) {
-            return $this->__data[$key];
-        }
-        return $this->collectionInnerGet($key);
     }
 
     public function innerSet($key, $value)

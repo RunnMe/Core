@@ -29,6 +29,21 @@ class testWithGetterClass
     }
 }
 
+class testWithGetterNotgetterClass
+    implements ObjectAsArrayInterface
+{
+    use ObjectAsArrayTrait;
+    protected $__notgetters = ['bar'];
+    protected function getFoo()
+    {
+        return 42;
+    }
+    protected function getBar()
+    {
+        return 'baz';
+    }
+}
+
 class testWithSetterClass
     implements ObjectAsArrayInterface
 {
@@ -36,6 +51,21 @@ class testWithSetterClass
     protected function setFoo($val)
     {
         $this->__data['foo'] = $val*2;
+    }
+}
+
+class testWithSetterNotsetterClass
+    implements ObjectAsArrayInterface
+{
+    use ObjectAsArrayTrait;
+    protected $__notsetters = ['bar'];
+    protected function setFoo($val)
+    {
+        $this->__data['foo'] = $val*2;
+    }
+    protected function setBar($val)
+    {
+        $this->__data['bar'] = $val/2;
     }
 }
 
@@ -71,13 +101,13 @@ class ObjectAsArrayTraitTest extends \PHPUnit_Framework_TestCase
     public function testIsEmpty()
     {
         $obj = new testClass();
-        $this->assertTrue($obj->isEmpty());
+        $this->assertTrue($obj->empty());
 
         $obj[0] = 1;
-        $this->assertFalse($obj->isEmpty());
+        $this->assertFalse($obj->empty());
 
         unset($obj[0]);
-        $this->assertTrue($obj->isEmpty());
+        $this->assertTrue($obj->empty());
     }
 
     public function testExistsSame()
@@ -169,9 +199,9 @@ class ObjectAsArrayTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($closure(null, 'foo'));
         $this->assertFalse($closure(null, function () {return 0;}));
         $this->assertFalse($closure(null, new testClass(['foo' => 'bar'])));
+        $this->assertFalse($closure(null, new \stdClass()));
 
         $this->assertTrue($closure(null, [1, 2, 3]));
-        $this->assertTrue($closure(null, new \stdClass()));
     }
 
     public function testFromArray()
@@ -291,11 +321,25 @@ class ObjectAsArrayTraitTest extends \PHPUnit_Framework_TestCase
     public function testGetter()
     {
         $obj = new testWithGetterClass();
+
+        $this->assertTrue(isset($obj['foo']));
+
         $obj[1] = 100;
         $obj['foo'] = 200;
 
         $this->assertEquals(100, $obj[1]);
         $this->assertEquals(42,  $obj['foo']);
+    }
+
+    public function testGetterNotGetter()
+    {
+        $obj = new testWithGetterNotgetterClass();
+
+        $this->assertTrue(isset($obj['foo']));
+        $this->assertFalse(isset($obj['bar']));
+
+        $this->assertSame(42,   $obj['foo']);
+        $this->assertSame(null, $obj['bar']);
     }
 
     public function testSetter()
@@ -306,6 +350,16 @@ class ObjectAsArrayTraitTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(100, $obj[1]);
         $this->assertEquals(400,  $obj['foo']);
+    }
+
+    public function testSetterNotsetter()
+    {
+        $obj = new testWithSetterNotsetterClass();
+        $obj['foo'] = 200;
+        $obj['bar'] = 400;
+
+        $this->assertEquals(400,  $obj['foo']);
+        $this->assertEquals(400,  $obj['bar']);
     }
 
     public function testSerialize()
