@@ -5,6 +5,8 @@
 * Метод ObjectAsArrayInterface::isEmpty() переименован в empty()
 * Добавлен интерфейс ConfigAwareInterface и его эталонная реализация ConfigAwareTrait
 * Для классов, имеющих схему данных, добавлены HasSchemaInterface и HasSchemaTrait
+* Добавлен класс ReflectionHelpers
+* Исправление логики ObjectAsArrayTrait::needCasting()
 
 7.0.1, 7.1.1, 7.2.1
 ===================

@@ -199,9 +199,9 @@ class ObjectAsArrayTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($closure(null, 'foo'));
         $this->assertFalse($closure(null, function () {return 0;}));
         $this->assertFalse($closure(null, new testClass(['foo' => 'bar'])));
+        $this->assertFalse($closure(null, new \stdClass()));
 
         $this->assertTrue($closure(null, [1, 2, 3]));
-        $this->assertTrue($closure(null, new \stdClass()));
     }
 
     public function testFromArray()

@@ -5,6 +5,8 @@
 * ObjectAsArrayInterface::isEmpty() method is renamed to empty()
 * ConfigAwareInterface interface and its implementation by ConfigAwareTrait are added
 * HasSchemaInterface and HasSchemaTrait are added for classes with data schema
+* ReflectionHelpers class is added
+* ObjectAsArrayTrait::needCasting() fix
 
 7.0.1, 7.1.1, 7.2.1
 ===================

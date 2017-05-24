@@ -198,7 +198,7 @@ trait ObjectAsArrayTrait
      */
     protected function needCasting($key, $value): bool
     {
-        if (is_null($value) || is_scalar($value) || $value instanceof \Closure || $value instanceof ObjectAsArrayInterface) {
+        if (is_null($value) || is_scalar($value) || is_object($value)) {
             return false;
         }
         return true;
