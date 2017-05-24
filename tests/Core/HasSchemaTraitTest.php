@@ -8,11 +8,22 @@ use Runn\Core\ObjectAsArrayInterface;
 use Runn\Core\ObjectAsArrayTrait;
 use Runn\Core\Std;
 
+class testConstructClass {
+    public $foo, $bar;
+    public function __construct($foo, $bar = 'bar')
+    {
+        $this->foo = $foo;
+        $this->bar = $bar;
+    }
+}
+
 class testClass
     implements ObjectAsArrayInterface, HasSchemaInterface
 {
     protected static $schema = [
-        ['class' => Std::class, ['foo' => 'bar', 'baz' => 42]],
+        'x' => ['class' => Std::class, ['foo' => 'bar', 'baz' => 42]],
+        'y' => ['class' => testConstructClass::class, 'bar' => 'test2', 'foo' => 'test1'],
+        'z' => ['class' => testConstructClass::class, 'foo' => 'test1'],
         42,
     ];
 
@@ -46,16 +57,20 @@ class HasSchemaTraitTest extends \PHPUnit_Framework_TestCase
 
         $obj->fromSchema($schema);
 
-        foreach ($schema as $key => $val) {
-            if (!empty($val['class'])) {
-                $this->assertInstanceOf($val['class'], $obj[$key]);
-                $class = $val['class'];
-                unset($val['class']);
-                $this->assertEquals(new $class(...array_values($val)), $obj[$key]);
-            } else {
-                $this->assertEquals($val, $obj[$key]);
-            }
-        }
+        $this->assertInstanceOf(Std::class, $obj['x']);
+        $this->assertSame('bar', $obj['x']->foo);
+        $this->assertSame(42, $obj['x']->baz);
+
+        $this->assertInstanceOf(testConstructClass::class, $obj['y']);
+        $this->assertSame('test1', $obj['y']->foo);
+        $this->assertSame('test2', $obj['y']->bar);
+
+        $this->assertInstanceOf(testConstructClass::class, $obj['z']);
+        $this->assertSame('test1', $obj['z']->foo);
+        $this->assertSame('bar',   $obj['z']->bar);
+
+        $this->assertSame(42, $obj[0]);
+
     }
 
 }
