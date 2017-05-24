@@ -72,7 +72,7 @@ class ReflectionHelpers
                 $ret[$name] = $data[$name];
                 continue;
             }
-            if (true === $def['optional'] && array_key_exists('default', $def)) {
+            if (array_key_exists('optional', $def) && true === $def['optional'] && array_key_exists('default', $def)) {
                 $ret[$name] = $def['default'];
                 continue;
             }
