@@ -21,7 +21,7 @@ trait HasSchemaTrait
     /**
      * @return iterable
      */
-    public static function getSchema(): array/*iterable*/
+    public static function getSchema(): iterable
     {
         return static::$schema;
     }
@@ -30,27 +30,29 @@ trait HasSchemaTrait
      * @param iterable $schema
      * @return $this
      */
-    public function fromSchema(/*iterable */$schema = [])
+    public function fromSchema(iterable $schema = null)
     {
         $data = [];
-        foreach ($schema as $key => $def)
-        {
-            if (!empty($def['class'])) {
+        if (null !== $schema) {
+            foreach ($schema as $key => $def)
+            {
+                if (!empty($def['class'])) {
 
-                $class = $def['class'];
-                unset($def['class']);
+                    $class = $def['class'];
+                    unset($def['class']);
 
-                // check if $def has only digital keys
-                if (ctype_digit(implode('', array_keys($def)))) {
-                    $data[$key] = new $class(...array_values($def));
-                // or not - it has string keys?
+                    // check if $def has only digital keys
+                    if (ctype_digit(implode('', array_keys($def)))) {
+                        $data[$key] = new $class(...array_values($def));
+                        // or not - it has string keys?
+                    } else {
+                        $ctor = ReflectionHelpers::getClassMethodArgs($class, '__construct');
+                        $args = ReflectionHelpers::prepareArgs($ctor, $def);
+                        $data[$key] = new $class(...array_values($args));
+                    }
                 } else {
-                    $ctor = ReflectionHelpers::getClassMethodArgs($class, '__construct');
-                    $args = ReflectionHelpers::prepareArgs($ctor, $def);
-                    $data[$key] = new $class(...array_values($args));
+                    $data[$key] = $def;
                 }
-            } else {
-                $data[$key] = $def;
             }
         }
         $this->fromArray($data);

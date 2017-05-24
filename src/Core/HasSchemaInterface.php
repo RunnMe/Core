@@ -15,12 +15,12 @@ interface HasSchemaInterface
     /**
      * @return iterable
      */
-    public static function getSchema(): array/*iterable*/;
+    public static function getSchema(): iterable;
 
     /**
      * @param iterable $schema
      * @return $this
      */
-    public function fromSchema(/*iterable */$schema = []);
+    public function fromSchema(iterable $schema = null);
 
 }

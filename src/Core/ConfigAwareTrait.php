@@ -20,7 +20,7 @@ trait ConfigAwareTrait
      * @param \Runn\Core\Config|null $config
      * @return $this
      */
-    public function setConfig(/*?*/Config $config)
+    public function setConfig(?Config $config)
     {
         $this->config = $config;
         return $this;
@@ -29,7 +29,7 @@ trait ConfigAwareTrait
     /**
      * @return \Runn\Core\Config|null
      */
-    public function getConfig(): /*?*/Config
+    public function getConfig(): ?Config
     {
         return $this->config;
     }
