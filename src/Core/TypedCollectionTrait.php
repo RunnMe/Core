@@ -19,12 +19,17 @@ trait TypedCollectionTrait
     }
     protected $__notgetters = ['type'];
 
-    protected function isValueTypeValid($value): bool
+    /**
+     * @param mixed $value
+     * @param bool $strict
+     * @return bool
+     */
+    protected function isValueTypeValid($value, $strict = false): bool
     {
         $type = static::getType();
 
         if (class_exists($type) || interface_exists($type)) {
-            return ($value instanceof $type);
+            return $strict ? ($type == get_class($value)) : ($value instanceof $type);
         }
 
         switch (gettype($value)) {
@@ -43,7 +48,7 @@ trait TypedCollectionTrait
 
     protected function checkValueType($value)
     {
-        if (true !== $this->isValueTypeValid($value)) {
+        if (!$this->isValueTypeValid($value)) {
             throw new Exception('Typed collection type mismatch');
         }
     }
