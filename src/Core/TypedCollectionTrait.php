@@ -29,7 +29,7 @@ trait TypedCollectionTrait
         $type = static::getType();
 
         if (class_exists($type) || interface_exists($type)) {
-            return $strict ? ($type == get_class($value)) : ($value instanceof $type);
+            return is_object($value) && ( $strict ? ($type == get_class($value)) : ($value instanceof $type) );
         }
 
         switch (gettype($value)) {
