@@ -249,8 +249,9 @@ trait CollectionTrait
      * @return static
      */
     public function reverse() {
-        $reversed = array_reverse($this->toArray(), true);
-        return (new static)->fromArray($reversed);
+        $clone = clone $this;
+        $clone->__data = array_reverse($clone->__data, true);
+        return $clone;
     }
 
 
