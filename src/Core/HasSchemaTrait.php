@@ -28,31 +28,47 @@ trait HasSchemaTrait
 
     /**
      * @param iterable $schema
+     * @return array
+     */
+    protected function prepareDataBySchema(/*iterable */$schema = [])
+    {
+        $data = [];
+        foreach ($schema as $key => $def) {
+            $value = $this->prepareValueBySchemaDef($def);
+            $data[$key] = $value;
+        }
+        return $data;
+    }
+
+    protected function prepareValueBySchemaDef(/*iterable */$def)
+    {
+        if (!empty($def['class'])) {
+
+            $class = $def['class'];
+            unset($def['class']);
+
+            // check if $def has only digital keys
+            if (ctype_digit(implode('', array_keys($def)))) {
+                return new $class(...array_values($def));
+
+            // or not - it has string keys?
+            } else {
+                $ctor = ReflectionHelpers::getClassMethodArgs($class, '__construct');
+                $args = ReflectionHelpers::prepareArgs($ctor, $def);
+                return new $class(...array_values($args));
+            }
+        } else {
+            return $def;
+        }
+    }
+
+    /**
+     * @param iterable $schema
      * @return $this
      */
     public function fromSchema(/*iterable */$schema = [])
     {
-        $data = [];
-        foreach ($schema as $key => $def)
-        {
-            if (!empty($def['class'])) {
-
-                $class = $def['class'];
-                unset($def['class']);
-
-                // check if $def has only digital keys
-                if (ctype_digit(implode('', array_keys($def)))) {
-                    $data[$key] = new $class(...array_values($def));
-                // or not - it has string keys?
-                } else {
-                    $ctor = ReflectionHelpers::getClassMethodArgs($class, '__construct');
-                    $args = ReflectionHelpers::prepareArgs($ctor, $def);
-                    $data[$key] = new $class(...array_values($args));
-                }
-            } else {
-                $data[$key] = $def;
-            }
-        }
+        $data = $this->prepareDataBySchema($schema);
         $this->fromArray($data);
         return $this;
     }
