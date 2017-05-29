@@ -34,13 +34,18 @@ trait HasSchemaTrait
     {
         $data = [];
         foreach ($schema as $key => $def) {
-            $value = $this->prepareValueBySchemaDef($def);
+            $value = $this->prepareValueBySchemaDef($key, $def);
             $data[$key] = $value;
         }
         return $data;
     }
 
-    protected function prepareValueBySchemaDef(/*iterable */$def)
+    /**
+     * @param string $key
+     * @param iterable $def
+     * @return mixed
+     */
+    protected function prepareValueBySchemaDef($key, /*iterable */$def)
     {
         if (!empty($def['class'])) {
 
