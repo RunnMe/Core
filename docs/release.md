@@ -1,6 +1,7 @@
 7.0.3, 7.1.3, 7.2.3
 ===================
 * Strict type check in TypedCollection is added
+* notgetters() and notsetters() protected methods are added instead of $__notgetters and $__notsetters
 
 7.0.2, 7.1.2, 7.2.2
 ===================
