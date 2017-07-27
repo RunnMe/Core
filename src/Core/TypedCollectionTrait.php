@@ -17,7 +17,14 @@ trait TypedCollectionTrait
         prepend as protected collectionPrepend;
         innerSet as protected collectionInnerSet;
     }
-    protected $__notgetters = ['type'];
+
+    /**
+     * @return array
+     */
+    protected function notgetters(): array
+    {
+        return ['type'];
+    }
 
     /**
      * @param mixed $value

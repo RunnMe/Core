@@ -22,22 +22,32 @@ trait ObjectAsArrayTrait
     /** @var array $__data */
     protected $__data = [];
 
-    /** @var array $__notgetters */
-    /** @var array $__notsetters */
-    // @todo: uncomment in future PHP versions
-    //protected $__notgetters = [];
-    //protected $__notsetters = [];
-
     /*
      * Data access protected methods
      */
+
+    /**
+     * @return array
+     */
+    protected function notgetters(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array
+     */
+    protected function notsetters(): array
+    {
+        return [];
+    }
 
     protected function innerIsSet($key)
     {
         return
             array_key_exists($key, $this->__data)
             ||
-            ( !in_array($key, $this->__notgetters ?? []) && method_exists($this, 'get' . ucfirst($key)) ) ;
+            ( !in_array($key, $this->notgetters()) && method_exists($this, 'get' . ucfirst($key)) ) ;
     }
 
     protected function innerUnSet($key)
@@ -48,7 +58,7 @@ trait ObjectAsArrayTrait
     protected function innerGet($key)
     {
         $method = 'get' . ucfirst($key);
-        if ( !in_array($key, $this->__notgetters ?? []) && method_exists($this, $method) ) {
+        if ( !in_array($key, $this->notgetters()) && method_exists($this, $method) ) {
             return $this->$method();
         }
         return isset($this->__data[$key]) ? $this->__data[$key] : null;
@@ -57,7 +67,7 @@ trait ObjectAsArrayTrait
     protected function innerSet($key, $val)
     {
         $method = 'set' . ucfirst($key);
-        if ( !in_array($key, $this->__notsetters ?? []) && method_exists($this, $method) ) {
+        if ( !in_array($key, $this->notsetters()) && method_exists($this, $method) ) {
             $this->$method($val);
         } else {
             if (null === $key) {
