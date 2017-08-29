@@ -15,7 +15,7 @@ class testClass
 {
     use StdGetSetValidateSanitizeTrait;
 
-    protected $__notsetters = ['bla1'];
+    protected function notsetters(): array { return ['bla1']; }
 
     protected function validateFoo()
     {

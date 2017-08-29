@@ -21,8 +21,21 @@ class Config
      */
     protected $storage;
 
-    protected $__notgetters = ['storage'];
-    protected $__notsetters = ['storage'];
+    /**
+     * @return array
+     */
+    protected function notgetters(): array
+    {
+        return array_merge(parent::notgetters(), ['storage']);
+    }
+
+    /**
+     * @return array
+     */
+    protected function notsetters(): array
+    {
+        return array_merge(parent::notsetters(), ['storage']);
+    }
 
     /**
      * @param \Runn\Storages\SingleValueStorageInterface|iterable|null $arg
