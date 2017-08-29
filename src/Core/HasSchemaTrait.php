@@ -21,7 +21,7 @@ trait HasSchemaTrait
     /**
      * @return iterable
      */
-    public static function getSchema(): array/*iterable*/
+    public static function getSchema(): iterable
     {
         return static::$schema;
     }
@@ -30,7 +30,7 @@ trait HasSchemaTrait
      * @param iterable $schema
      * @return array
      */
-    protected function prepareDataBySchema(/*iterable */$schema = [])
+    protected function prepareDataBySchema(iterable $schema = null)
     {
         $data = [];
         foreach ($schema as $key => $def) {
@@ -71,7 +71,7 @@ trait HasSchemaTrait
      * @param iterable $schema
      * @return $this
      */
-    public function fromSchema(/*iterable */$schema = [])
+    public function fromSchema(iterable $schema = null)
     {
         $data = $this->prepareDataBySchema($schema);
         $this->fromArray($data);
