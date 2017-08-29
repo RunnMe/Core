@@ -33,7 +33,7 @@ class testWithGetterNotgetterClass
     implements ObjectAsArrayInterface
 {
     use ObjectAsArrayTrait;
-    protected $__notgetters = ['bar'];
+    protected function notgetters(): array { return['bar']; }
     protected function getFoo()
     {
         return 42;
@@ -58,7 +58,7 @@ class testWithSetterNotsetterClass
     implements ObjectAsArrayInterface
 {
     use ObjectAsArrayTrait;
-    protected $__notsetters = ['bar'];
+    protected function notsetters(): array { return ['bar']; }
     protected function setFoo($val)
     {
         $this->__data['foo'] = $val*2;

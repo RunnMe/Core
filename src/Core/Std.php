@@ -13,7 +13,14 @@ class Std
 {
 
     use StdGetSetValidateSanitizeTrait;
-    protected $__notgetters = ['requiredKeys'];
+
+    /**
+     * @return array
+     */
+    protected function notgetters(): array
+    {
+        return ['requiredKeys'];
+    }
 
     /**
      * @var array

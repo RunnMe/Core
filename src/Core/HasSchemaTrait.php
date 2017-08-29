@@ -21,40 +21,59 @@ trait HasSchemaTrait
     /**
      * @return iterable
      */
-    public static function getSchema(): iterable
+    public static function getSchema(): array/*iterable*/
     {
         return static::$schema;
     }
 
     /**
      * @param iterable $schema
-     * @return $this
+     * @return array
      */
-    public function fromSchema(iterable $schema = null)
+    protected function prepareDataBySchema(/*iterable */$schema = [])
     {
         $data = [];
-        if (null !== $schema) {
-            foreach ($schema as $key => $def)
-            {
-                if (!empty($def['class'])) {
-
-                    $class = $def['class'];
-                    unset($def['class']);
-
-                    // check if $def has only digital keys
-                    if (ctype_digit(implode('', array_keys($def)))) {
-                        $data[$key] = new $class(...array_values($def));
-                        // or not - it has string keys?
-                    } else {
-                        $ctor = ReflectionHelpers::getClassMethodArgs($class, '__construct');
-                        $args = ReflectionHelpers::prepareArgs($ctor, $def);
-                        $data[$key] = new $class(...array_values($args));
-                    }
-                } else {
-                    $data[$key] = $def;
-                }
-            }
+        foreach ($schema as $key => $def) {
+            $value = $this->prepareValueBySchemaDef($key, $def);
+            $data[$key] = $value;
         }
+        return $data;
+    }
+
+    /**
+     * @param string $key
+     * @param iterable $def
+     * @return mixed
+     */
+    protected function prepareValueBySchemaDef($key, /*iterable */$def)
+    {
+        if (!empty($def['class'])) {
+
+            $class = $def['class'];
+            unset($def['class']);
+
+            // check if $def has only digital keys
+            if (ctype_digit(implode('', array_keys($def)))) {
+                return new $class(...array_values($def));
+
+            // or not - it has string keys?
+            } else {
+                $ctor = ReflectionHelpers::getClassMethodArgs($class, '__construct');
+                $args = ReflectionHelpers::prepareArgs($ctor, $def);
+                return new $class(...array_values($args));
+            }
+        } else {
+            return $def;
+        }
+    }
+
+    /**
+     * @param iterable $schema
+     * @return $this
+     */
+    public function fromSchema(/*iterable */$schema = [])
+    {
+        $data = $this->prepareDataBySchema($schema);
         $this->fromArray($data);
         return $this;
     }

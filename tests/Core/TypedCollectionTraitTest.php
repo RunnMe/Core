@@ -2,6 +2,7 @@
 
 namespace Runn\tests\Core\TypedCollectionTrait;
 
+use Runn\Core\Exception;
 use Runn\Core\TypedCollectionInterface;
 use Runn\Core\TypedCollectionTrait;
 
@@ -12,6 +13,22 @@ class testClass
     public static function getType()
     {
         return testValueClass::class;
+    }
+}
+
+class testStrictClass
+    implements TypedCollectionInterface
+{
+    use TypedCollectionTrait;
+    public static function getType()
+    {
+        return testValueClass::class;
+    }
+    protected function checkValueType($value)
+    {
+        if (!$this->isValueTypeValid($value, true)) {
+            throw new Exception('Typed collection type mismatch');
+        }
     }
 }
 
@@ -130,6 +147,24 @@ class TypedCollectionTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(5, $collection);
     }
 
+    public function testValidStrictType()
+    {
+        $this->assertSame(testValueClass::class, testStrictClass::getType());
+        $collection = (new testStrictClass)->fromArray([new testValueClass(1), new testValueClass(2)]);
+
+        $this->assertInstanceOf(TypedCollectionInterface::class, $collection);
+        $this->assertCount(2, $collection);
+    }
+
+    /**
+     * @expectedException \Runn\Core\Exception
+     * @expectedExceptionMessage Typed collection type mismatch
+     */
+    public function testInvalidStrictType()
+    {
+        $this->assertSame(testValueClass::class, testStrictClass::getType());
+        $collection = (new testStrictClass)->fromArray([new class (1) extends testValueClass {}]);
+    }
 
     /**
      * @expectedException \Runn\Core\Exception
