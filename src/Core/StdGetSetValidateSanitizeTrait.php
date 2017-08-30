@@ -83,6 +83,8 @@ trait StdGetSetValidateSanitizeTrait
      * @param iterable $data
      * @return $this
      * @throws \Runn\Core\Exceptions
+     *
+     * @7.1
      */
     public function merge(iterable $data)
     {

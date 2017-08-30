@@ -12,6 +12,7 @@ class ConfigAwareTraitTest extends \PHPUnit_Framework_TestCase
     public function testTrait()
     {
         $obj = new class implements ConfigAwareInterface{ use ConfigAwareTrait; };
+        // @7.1
         $this->assertNull($obj->getConfig());
 
         $config = new Config(['foo' => 'bar']);
