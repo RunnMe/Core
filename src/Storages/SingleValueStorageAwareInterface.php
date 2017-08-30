@@ -10,13 +10,17 @@ interface SingleValueStorageAwareInterface
 {
 
     /**
-     * @param \Runn\Storages\SingleValueStorageInterface|null $storage
+     * @param \Runn\Storages\SingleValueStorageInterface $storage
      * @return $this
+     *
+     * @7.1
      */
     public function setStorage(/*?*/SingleValueStorageInterface $storage);
 
     /**
-     * @return \Runn\Storages\SingleValueStorageInterface|null
+     * @return \Runn\Storages\SingleValueStorageInterface
+     *
+     * @7.1
      */
     public function getStorage(): /*?*/SingleValueStorageInterface;
 

@@ -17,8 +17,10 @@ trait ConfigAwareTrait
     protected $config;
 
     /**
-     * @param \Runn\Core\Config|null $config
+     * @param \Runn\Core\Config $config
      * @return $this
+     *
+     * @7.1
      */
     public function setConfig(/*?*/Config $config)
     {
@@ -27,7 +29,9 @@ trait ConfigAwareTrait
     }
 
     /**
-     * @return \Runn\Core\Config|null
+     * @return \Runn\Core\Config
+     *
+     * @7.1
      */
     public function getConfig(): /*?*/Config
     {

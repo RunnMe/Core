@@ -39,6 +39,8 @@ class Config
 
     /**
      * @param \Runn\Storages\SingleValueStorageInterface|iterable|null $arg
+     *
+     * @8.0
      */
     public function __construct(/* SingleValueStorageInterface | iterable */$arg = null)
     {
@@ -52,6 +54,8 @@ class Config
     /**
      * @param \Runn\Storages\SingleValueStorageInterface $storage
      * @return $this
+     *
+     * @7.1
      */
     public function setStorage(/*?*/SingleValueStorageInterface $storage)
     {
@@ -60,7 +64,9 @@ class Config
     }
 
     /**
-     * @return \Runn\Storages\SingleValueStorageInterface|null
+     * @return \Runn\Storages\SingleValueStorageInterface
+     *
+     * @7.1
      */
     public function getStorage(): /*?*/SingleValueStorageInterface
     {

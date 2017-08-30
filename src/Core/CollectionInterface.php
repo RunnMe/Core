@@ -22,8 +22,28 @@ interface CollectionInterface
     public function first();
     public function last();
 
-    public function existsElementByAttributes(array /* iterable */ $attributes);
+    /**
+     * @param array $attributes
+     * @return bool
+     *
+     * @7.1
+     */
+    public function existsElementByAttributes(array /* iterable */ $attributes): bool;
+
+    /**
+     * @param array $attributes
+     * @return static
+     *
+     * @7.1
+     */
     public function findAllByAttributes(array /* iterable */ $attributes);
+
+    /**
+     * @param array $attributes
+     * @return mixed|null
+     *
+     * @7.1
+     */
     public function findByAttributes(array /* iterable */ $attributes);
 
     public function asort();

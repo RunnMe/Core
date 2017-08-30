@@ -227,6 +227,8 @@ trait ObjectAsArrayTrait
     /**
      * @param iterable $data
      * @return $this
+     *
+     * @7.1
      */
     public function fromArray(/* iterable */ $data)
     {
@@ -238,6 +240,8 @@ trait ObjectAsArrayTrait
     /**
      * @param iterable $data
      * @return $this
+     *
+     * @7.1
      */
     public function merge(/* iterable */$data)
     {
