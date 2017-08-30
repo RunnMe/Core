@@ -46,12 +46,10 @@ trait HasSchemaTrait
 
     /**
      * @param string $key
-     * @param iterable $def
+     * @param mixed $def
      * @return mixed
-     *
-     * @7.1
      */
-    protected function prepareValueBySchemaDef($key, /*iterable */$def)
+    protected function prepareValueBySchemaDef($key, $def)
     {
         if (!empty($def['class'])) {
 
