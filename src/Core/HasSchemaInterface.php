@@ -13,14 +13,14 @@ interface HasSchemaInterface
 {
 
     /**
-     * @return array
+     * @return iterable
      *
      * @7.1
      */
     public static function getSchema(): iterable;
 
     /**
-     * @param iterable $schema
+     * @param iterable|null $schema
      * @return $this
      *
      * @7.1

@@ -64,7 +64,7 @@ class Config
     }
 
     /**
-     * @return \Runn\Storages\SingleValueStorageInterface
+     * @return \Runn\Storages\SingleValueStorageInterface|null
      *
      * @7.1
      */

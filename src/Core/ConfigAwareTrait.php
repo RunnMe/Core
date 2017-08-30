@@ -17,7 +17,7 @@ trait ConfigAwareTrait
     protected $config;
 
     /**
-     * @param \Runn\Core\Config $config
+     * @param \Runn\Core\Config|null $config
      * @return $this
      *
      * @7.1
@@ -29,7 +29,7 @@ trait ConfigAwareTrait
     }
 
     /**
-     * @return \Runn\Core\Config
+     * @return \Runn\Core\Config|null
      *
      * @7.1
      */
