@@ -50,8 +50,6 @@ trait HasSchemaTrait
      * @param string $key
      * @param mixed $def
      * @return mixed
-     *
-     * @7.1
      */
     protected function prepareValueBySchemaDef($key, $def)
     {
