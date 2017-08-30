@@ -20,6 +20,8 @@ trait HasSchemaTrait
 
     /**
      * @return iterable
+     *
+     * @7.1
      */
     public static function getSchema(): iterable
     {
@@ -27,25 +29,29 @@ trait HasSchemaTrait
     }
 
     /**
-     * @param iterable $schema
+     * @param iterable|null $schema
      * @return array
+     *
+     * @7.1
      */
     protected function prepareDataBySchema(iterable $schema = null)
     {
         $data = [];
-        foreach ($schema as $key => $def) {
-            $value = $this->prepareValueBySchemaDef($key, $def);
-            $data[$key] = $value;
+        if (null !== $schema) {
+            foreach ($schema as $key => $def) {
+                $value = $this->prepareValueBySchemaDef($key, $def);
+                $data[$key] = $value;
+            }
         }
         return $data;
     }
 
     /**
      * @param string $key
-     * @param iterable $def
+     * @param mixed $def
      * @return mixed
      */
-    protected function prepareValueBySchemaDef($key, iterable $def)
+    protected function prepareValueBySchemaDef($key, $def)
     {
         if (!empty($def['class'])) {
 
@@ -70,6 +76,8 @@ trait HasSchemaTrait
     /**
      * @param iterable $schema
      * @return $this
+     *
+     * @7.1
      */
     public function fromSchema(iterable $schema = null)
     {
