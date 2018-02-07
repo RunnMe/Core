@@ -1,6 +1,7 @@
 7.0.4, 7.1.4, 7.2.4
 ===================
 * More PHP 7.1 compatibility
+* License identifier update
 
 7.0.3, 7.1.3, 7.2.3
 ===================
