@@ -3,7 +3,7 @@
   "description": "Runn Me! Core Library",
   "keywords": ["runn", "runn.me", "framework", "std", "collection", "multiexception"],
   "type": "library",
-  "license": "LGPL v.3",
+  "license": "LGPL-3.0-or-later",
   "authors": [
     {
       "name": "Albert Stepantsev"
