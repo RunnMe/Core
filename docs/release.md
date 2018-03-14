@@ -1,3 +1,7 @@
+7.0.5, 7.1.5, 7.2.5
+===================
+* PSR DI Container is added
+
 7.0.4, 7.1.4, 7.2.4
 ===================
 * More PHP 7.1 compatibility

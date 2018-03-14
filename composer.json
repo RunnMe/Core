@@ -22,7 +22,8 @@
     }
   ],
   "require": {
-    "php": ">=7.0"
+    "php": ">=7.0",
+    "psr/container": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "5.*"
