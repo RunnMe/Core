@@ -2,10 +2,11 @@
 
 namespace Runn\Di;
 
+use Runn\Core\ObjectAsArrayInterface;
 use Runn\Core\StdGetSetInterface;
 use Runn\Core\StdGetSetTrait;
 
-class Container implements StdGetSetInterface, ContainerInterface
+class Container implements ObjectAsArrayInterface, StdGetSetInterface, ContainerInterface
 {
 
     use StdGetSetTrait;
@@ -15,8 +16,6 @@ class Container implements StdGetSetInterface, ContainerInterface
      *
      * @param string $id Identifier of the entry to look for.
      * @param callable $resolver Function that resolves the entry and returns it.
-     *
-     * @throws \Psr\Container\ContainerExceptionInterface Error while retrieving the entry.
      *
      * @return $this.
      */

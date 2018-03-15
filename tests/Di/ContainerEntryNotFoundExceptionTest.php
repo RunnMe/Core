@@ -1,6 +1,6 @@
 <?php
 
-namespace Runn\tests\Di\ContainerException;
+namespace Runn\tests\Di\ContainerEntryNotFoundException;
 
 use Psr\Container\ContainerExceptionInterface;
 use Runn\Di\ContainerEntryNotFoundException;
