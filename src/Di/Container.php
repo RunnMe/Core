@@ -21,7 +21,7 @@ class Container implements ObjectAsArrayInterface, StdGetSetInterface, Container
      */
     public function set($id, callable $resolver)
     {
-        $this[$id] = $resolver;
+        $this->innerSet($id, $resolver);
         return $this;
     }
 
@@ -41,7 +41,7 @@ class Container implements ObjectAsArrayInterface, StdGetSetInterface, Container
             throw new ContainerEntryNotFoundException($id);
         }
         try {
-            return $this[$id]();
+            return $this->innerGet($id)();
         } catch (\Throwable $e) {
             throw new ContainerException($e);
         }
@@ -61,6 +61,46 @@ class Container implements ObjectAsArrayInterface, StdGetSetInterface, Container
     public function has($id)
     {
         return isset($this[$id]);
+    }
+
+    /**
+     * @param $key
+     * @param $val
+     */
+    public function __set($key, $val)
+    {
+        $this->set($key, $val);
+    }
+
+    /**
+     * @param $key
+     * @return mixed
+     * @throws ContainerEntryNotFoundException
+     * @throws ContainerException
+     */
+    public function __get($key)
+    {
+        return $this->get($key);
+    }
+
+    /**
+     * @param mixed $offset
+     * @param mixed $value
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->set($offset, $value);
+    }
+
+    /**
+     * @param mixed $offset
+     * @return mixed
+     * @throws ContainerEntryNotFoundException
+     * @throws ContainerException
+     */
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
     }
 
 }

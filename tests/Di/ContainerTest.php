@@ -12,13 +12,31 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \TypeError
      */
-    public function testSetInvalidArgument()
+    public function testSetInvalidArgument1()
     {
         $container = new Container();
         $container->set('id', 'foo');
     }
 
-    public function testGetInvalidId()
+    /**
+     * @expectedException \TypeError
+     */
+    public function testSetInvalidArgument2()
+    {
+        $container = new Container();
+        $container->id = 'foo';
+    }
+
+    /**
+     * @expectedException \TypeError
+     */
+    public function testSetInvalidArgument3()
+    {
+        $container = new Container();
+        $container['id'] = 'foo';
+    }
+
+    public function testGetInvalidId1()
     {
         try {
             $container = new Container();
@@ -30,7 +48,31 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->fail();
     }
 
-    public function testGetWithException()
+    public function testGetInvalidId2()
+    {
+        try {
+            $container = new Container();
+            $res = $container->test;
+        } catch (ContainerEntryNotFoundException $e) {
+            $this->assertSame('test', $e->getId());
+            return;
+        }
+        $this->fail();
+    }
+
+    public function testGetInvalidId3()
+    {
+        try {
+            $container = new Container();
+            $res = $container['test'];
+        } catch (ContainerEntryNotFoundException $e) {
+            $this->assertSame('test', $e->getId());
+            return;
+        }
+        $this->fail();
+    }
+
+    public function testGetWithException1()
     {
         $exception = new \Exception;
         try {
@@ -39,6 +81,38 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
                 throw $exception;
             });
             $res = $container->get('test');
+        } catch (ContainerException $e) {
+            $this->assertSame($exception, $e->getPrevious());
+            return;
+        }
+        $this->fail();
+    }
+
+    public function testGetWithException2()
+    {
+        $exception = new \Exception;
+        try {
+            $container = new Container();
+            $container->set('test', function () use ($exception) {
+                throw $exception;
+            });
+            $res = $container->test;
+        } catch (ContainerException $e) {
+            $this->assertSame($exception, $e->getPrevious());
+            return;
+        }
+        $this->fail();
+    }
+
+    public function testGetWithException3()
+    {
+        $exception = new \Exception;
+        try {
+            $container = new Container();
+            $container->set('test', function () use ($exception) {
+                throw $exception;
+            });
+            $res = $container['test'];
         } catch (ContainerException $e) {
             $this->assertSame($exception, $e->getPrevious());
             return;
@@ -55,8 +129,24 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $container->set('test', function () {return 42;});
 
         $this->assertTrue($container->has('test'));
-        $this->assertSame(42, $container->get('test'));
+        $this->assertTrue(isset($container->test));
+        $this->assertTrue(isset($container['test']));
 
+        $this->assertSame(42, $container->get('test'));
+        $this->assertSame(42, $container->test);
+        $this->assertSame(42, $container['test']);
+
+        $container->test = function () {return 24;};
+
+        $this->assertSame(24, $container->get('test'));
+        $this->assertSame(24, $container->test);
+        $this->assertSame(24, $container['test']);
+
+        $container['test'] = function () {return 12;};
+
+        $this->assertSame(12, $container->get('test'));
+        $this->assertSame(12, $container->test);
+        $this->assertSame(12, $container['test']);
     }
 
 }
