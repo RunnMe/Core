@@ -18,14 +18,12 @@ class ContainerEntryNotFoundException extends ContainerException implements NotF
      * ContainerEntryNotFoundException constructor.
      *
      * @param string $id Container entry identifier
-     * @param string $message
-     * @param int $code
      * @param \Throwable|null $previous
      */
-    public function __construct(string $id, $message = "", $code = 0, \Throwable $previous = null)
+    public function __construct(string $id, \Throwable $previous = null)
     {
         $this->id = $id;
-        parent::__construct($message, $code, $previous);
+        parent::__construct($previous);
     }
 
     /**
