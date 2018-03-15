@@ -8,6 +8,9 @@
         <testsuite name="Runn\Core">
             <directory phpVersionOperator=">=" phpVersion="7.0">Core</directory>
         </testsuite>
+        <testsuite name="Runn\Di">
+            <directory phpVersionOperator=">=" phpVersion="7.0">Di</directory>
+        </testsuite>
         <testsuite name="Runn\Reflection">
             <directory phpVersionOperator=">=" phpVersion="7.0">Reflection</directory>
         </testsuite>
