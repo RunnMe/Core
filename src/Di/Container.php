@@ -11,18 +11,41 @@ class Container implements ObjectAsArrayInterface, StdGetSetInterface, Container
 
     use StdGetSetTrait;
 
+    protected $singletons = [];
+    protected $resolved = [];
+
     /**
      * Sets a resolver for entry of the container by its identifier.
+     *
+     * @param string $id Identifier of the entry to look for.
+     * @param callable $resolver Function that resolves the entry and returns it.
+     * @param bool $singleton Is entry singleton?
+     *
+     * @return $this.
+     */
+    public function set($id, callable $resolver, bool $singleton = false)
+    {
+        $this->innerSet($id, $resolver);
+        unset($this->resolved[$id]);
+        if ($singleton) {
+            $this->singletons[$id] = true;
+        } else {
+            unset($this->singletons[$id]);
+        }
+        return $this;
+    }
+
+    /**
+     * Sets a resolver for entry of the container by its identifier as singleton.
      *
      * @param string $id Identifier of the entry to look for.
      * @param callable $resolver Function that resolves the entry and returns it.
      *
      * @return $this.
      */
-    public function set($id, callable $resolver)
+    public function singleton($id, callable $resolver)
     {
-        $this->innerSet($id, $resolver);
-        return $this;
+        return $this->set($id, $resolver, true);
     }
 
     /**
@@ -41,6 +64,12 @@ class Container implements ObjectAsArrayInterface, StdGetSetInterface, Container
             throw new ContainerEntryNotFoundException($id);
         }
         try {
+            if (isset($this->singletons[$id])) {
+                if (!isset($this->resolved[$id])) {
+                    $this->resolved[$id] = $this->innerGet($id)();
+                }
+                return $this->resolved[$id];
+            }
             return $this->innerGet($id)();
         } catch (\Throwable $e) {
             throw new ContainerException($e);
