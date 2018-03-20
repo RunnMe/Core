@@ -44,6 +44,18 @@ class ReflectionHelpersTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('test', $args['arg1']['default']);
 
         $object = new class {
+            public function foo(string $arg1, int $arg2, array $arg3, $arg4) {}
+        };
+
+        $args = ReflectionHelpers::getClassMethodArgs(get_class($object), 'foo');
+        $this->assertInternalType('array', $args);
+        $this->assertCount(4, $args);
+        $this->assertSame('string', $args['arg1']['type']);
+        $this->assertSame('int', $args['arg2']['type']);
+        $this->assertSame('array', $args['arg3']['type']);
+        $this->assertFalse(isset($args['arg4']['type']));
+
+        $object = new class {
             public function foo(...$args) {}
         };
 
@@ -53,6 +65,21 @@ class ReflectionHelpersTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($args['args']['optional']);
         $this->assertTrue($args['args']['variadic']);
         $this->assertFalse(isset($args['args']['default']));
+        $this->assertFalse(isset($args['args']['type']));
+
+        $reflector = new \ReflectionMethod(ReflectionHelpers::class, 'getClassMethodArgs');
+        $staticVariables = $reflector->getStaticVariables();
+        $this->assertInternalType('array', $staticVariables);
+        $this->assertCount(1, $staticVariables);
+        $this->assertNotNull($staticVariables['cache']);
+
+        $object2 = new ReflectionHelpers();
+        ReflectionHelpers::getClassMethodArgs(get_class($object2), 'getClassMethodArgs');
+        $reflector = new \ReflectionMethod(ReflectionHelpers::class, 'getClassMethodArgs');
+        $staticVariables = $reflector->getStaticVariables();
+        $this->assertInternalType('array', $staticVariables['cache']);
+        $this->assertNotNull($staticVariables['cache'][get_class($object)]['foo']);
+        $this->assertNotNull($staticVariables['cache'][get_class($object2)]['getClassMethodArgs']);
     }
 
     /**
