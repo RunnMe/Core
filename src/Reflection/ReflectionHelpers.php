@@ -20,7 +20,7 @@ class ReflectionHelpers
      * @return array
      * @throws \ReflectionException
      *
-     * @7.1
+     * @7.1 __toString() is replaced with getName()
      */
     public static function getClassMethodArgs($class, string $method)
     {
@@ -46,7 +46,7 @@ class ReflectionHelpers
                 $args[$param->name]['default'] = $param->getDefaultValue();
             }
             if ($param->hasType()) {
-                $args[$param->name]['type'] = $param->getType()->__toString(); /* replace __toString() with getName() */
+                $args[$param->name]['type'] = (string)$param->getType();
             }
         }
         $cache[$class][$method] = $args;
