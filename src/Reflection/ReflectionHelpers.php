@@ -18,13 +18,22 @@ class ReflectionHelpers
      * @param string $class
      * @param string $method
      * @return array
-     * @throws \Runn\Reflection\Exception
+     * @throws \ReflectionException
+     *
+     * @7.1 __toString() is replaced with getName()
      */
     public static function getClassMethodArgs($class, string $method)
     {
+        static $cache = null;
+
+        if (null !== $cache && isset($cache[$class][$method])) {
+            return $cache[$class][$method];
+        }
+
         $reflector = new \ReflectionMethod($class, $method);
         $params = $reflector->getParameters();
         if (empty($params)) {
+            $cache[$class][$method] = [];
             return [];
         }
         $args = [];
@@ -36,7 +45,11 @@ class ReflectionHelpers
             if ($param->isOptional() && $param->isDefaultValueAvailable()) {
                 $args[$param->name]['default'] = $param->getDefaultValue();
             }
+            if ($param->hasType()) {
+                $args[$param->name]['type'] = (string)$param->getType();
+            }
         }
+        $cache[$class][$method] = $args;
         return $args;
     }
 
