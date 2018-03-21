@@ -19,6 +19,8 @@ class ReflectionHelpers
      * @param string $method
      * @return array
      * @throws \ReflectionException
+     *
+     * @7.1
      */
     public static function getClassMethodArgs($class, string $method)
     {
@@ -44,7 +46,7 @@ class ReflectionHelpers
                 $args[$param->name]['default'] = $param->getDefaultValue();
             }
             if ($param->hasType()) {
-                $args[$param->name]['type'] = $param->getType()->getName();
+                $args[$param->name]['type'] = $param->getType()->__toString(); /* replace __toString() with getName() */
             }
         }
         $cache[$class][$method] = $args;
