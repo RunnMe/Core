@@ -19,19 +19,14 @@ class Container implements ObjectAsArrayInterface, StdGetSetInterface, Container
      *
      * @param string $id Identifier of the entry to look for.
      * @param callable $resolver Function that resolves the entry and returns it.
-     * @param bool $singleton Is entry singleton?
      *
      * @return $this.
      */
-    public function set($id, callable $resolver, bool $singleton = false)
+    public function set($id, callable $resolver)
     {
         $this->innerSet($id, $resolver);
         unset($this->resolved[$id]);
-        if ($singleton) {
-            $this->singletons[$id] = true;
-        } else {
-            unset($this->singletons[$id]);
-        }
+        unset($this->singletons[$id]);
         return $this;
     }
 
@@ -45,7 +40,10 @@ class Container implements ObjectAsArrayInterface, StdGetSetInterface, Container
      */
     public function singleton($id, callable $resolver)
     {
-        return $this->set($id, $resolver, true);
+        $this->innerSet($id, $resolver);
+        unset($this->resolved[$id]);
+        $this->singletons[$id] = true;
+        return $this;
     }
 
     /**

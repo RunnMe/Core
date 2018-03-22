@@ -150,25 +150,6 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(12, $container['test']);
     }
 
-    public function testSetSingleton()
-    {
-        $container = new Container();
-
-        $this->assertFalse($container->has('test'));
-
-        $container->set('test', function () {return new Std(['foo' => 'bar']);}, true);
-
-        $this->assertTrue($container->has('test'));
-
-        $obj1 = $container->get('test');
-        $this->assertEquals(new Std(['foo' => 'bar']), $obj1);
-
-        $obj2 = $container->get('test');
-        $this->assertEquals(new Std(['foo' => 'bar']), $obj2);
-
-        $this->assertSame($obj1, $obj2);
-    }
-
     public function testSingleton()
     {
         $container = new Container();

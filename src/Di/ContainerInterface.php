@@ -12,11 +12,10 @@ interface ContainerInterface extends PsrContainerInterface
      *
      * @param string $id Identifier of the entry to look for.
      * @param callable $resolver Function that resolves the entry and returns it.
-     * @param bool $singleton Is entry singleton?
      *
      * @return $this
      */
-    public function set($id, callable $resolver, bool $singleton = false);
+    public function set($id, callable $resolver);
 
     /**
      * Sets a resolver for entry of the container by its identifier as singleton.
