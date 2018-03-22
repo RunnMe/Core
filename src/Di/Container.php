@@ -42,6 +42,7 @@ class Container implements ObjectAsArrayInterface, StdGetSetInterface, Container
     {
         $this->innerSet($id, $resolver);
         unset($this->resolved[$id]);
+        $this->resolved[$id] = $this->innerGet($id)();
         $this->singletons[$id] = true;
         return $this;
     }
@@ -63,9 +64,6 @@ class Container implements ObjectAsArrayInterface, StdGetSetInterface, Container
         }
         try {
             if (isset($this->singletons[$id])) {
-                if (!isset($this->resolved[$id])) {
-                    $this->resolved[$id] = $this->innerGet($id)();
-                }
                 return $this->resolved[$id];
             }
             return $this->innerGet($id)();
