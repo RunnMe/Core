@@ -6,13 +6,13 @@
 
     <testsuites>
         <testsuite name="Runn\Core">
-            <directory phpVersionOperator=">=" phpVersion="7.0">Core</directory>
+            <directory phpVersionOperator=">=" phpVersion="7.1">Core</directory>
         </testsuite>
         <testsuite name="Runn\Di">
-            <directory phpVersionOperator=">=" phpVersion="7.0">Di</directory>
+            <directory phpVersionOperator=">=" phpVersion="7.1">Di</directory>
         </testsuite>
         <testsuite name="Runn\Reflection">
-            <directory phpVersionOperator=">=" phpVersion="7.0">Reflection</directory>
+            <directory phpVersionOperator=">=" phpVersion="7.1">Reflection</directory>
         </testsuite>
     </testsuites>
 
