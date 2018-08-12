@@ -25,24 +25,18 @@ interface CollectionInterface
     /**
      * @param iterable $attributes
      * @return bool
-     *
-     * @7.1
      */
     public function existsElementByAttributes(iterable $attributes): bool;
 
     /**
      * @param iterable $attributes
      * @return static
-     *
-     * @7.1
      */
     public function findAllByAttributes(iterable $attributes);
 
     /**
      * @param iterable $attributes
      * @return mixed|null
-     *
-     * @7.1
      */
     public function findByAttributes(iterable $attributes);
 

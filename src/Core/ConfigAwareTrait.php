@@ -19,8 +19,6 @@ trait ConfigAwareTrait
     /**
      * @param \Runn\Core\Config|null $config
      * @return $this
-     *
-     * @7.1
      */
     public function setConfig(?Config $config)
     {
@@ -30,8 +28,6 @@ trait ConfigAwareTrait
 
     /**
      * @return \Runn\Core\Config|null
-     *
-     * @7.1
      */
     public function getConfig(): ?Config
     {

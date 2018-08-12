@@ -19,8 +19,6 @@ class ReflectionHelpers
      * @param string $method
      * @return array
      * @throws \ReflectionException
-     *
-     * @7.1 __toString() is replaced with getName()
      */
     public static function getClassMethodArgs($class, string $method)
     {

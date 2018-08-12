@@ -58,8 +58,6 @@ class Std
      * Std constructor.
      * @param iterable|null $data
      * @throws \Runn\Core\Exceptions
-     *
-     * @7.1
      */
     public function __construct(iterable $data = null)
     {
