@@ -20,8 +20,6 @@ trait HasSchemaTrait
 
     /**
      * @return iterable
-     *
-     * @7.1
      */
     public static function getSchema(): iterable
     {
@@ -31,8 +29,6 @@ trait HasSchemaTrait
     /**
      * @param iterable|null $schema
      * @return array
-     *
-     * @7.1
      */
     protected function prepareDataBySchema(iterable $schema = null)
     {
@@ -76,8 +72,6 @@ trait HasSchemaTrait
     /**
      * @param iterable $schema
      * @return $this
-     *
-     * @7.1
      */
     public function fromSchema(iterable $schema = null)
     {

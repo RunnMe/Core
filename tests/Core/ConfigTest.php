@@ -67,7 +67,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $obj = new Config();
 
-        // @7.1
         $this->assertNull($obj->getStorage());
 
         $file = new FakeStorage();
@@ -76,7 +75,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($obj, $ret);
         $this->assertEquals($file, $obj->getStorage());
 
-        // @7.1
         $ret = $obj->setStorage(null);
 
         $this->assertSame($obj, $ret);
@@ -88,13 +86,11 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $obj = new Config();
 
         $this->assertNull($obj->storage);
-        // @7.1
         $this->assertNull($obj->getStorage());
 
         $obj->storage = 'test.txt';
 
         $this->assertEquals('test.txt', $obj->storage);
-        // @7.1
         $this->assertNull($obj->getStorage());
 
         $obj->setStorage(new FakeStorage());

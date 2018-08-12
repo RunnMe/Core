@@ -42,8 +42,6 @@ trait CollectionTrait
     /**
      * @param iterable $data
      * @return $this
-     *
-     * @7.1
      */
     public function merge(iterable $data)
     {
@@ -129,8 +127,6 @@ trait CollectionTrait
     /**
      * @param iterable $attributes
      * @return bool
-     *
-     * @7.1
      */
     public function existsElementByAttributes(iterable $attributes): bool
     {
@@ -158,8 +154,6 @@ trait CollectionTrait
     /**
      * @param iterable $attributes
      * @return static
-     *
-     * @7.1
      */
     public function findAllByAttributes(iterable $attributes)
     {
@@ -182,8 +176,6 @@ trait CollectionTrait
     /**
      * @param iterable $attributes
      * @return mixed|null
-     *
-     * @7.1
      */
     public function findByAttributes(iterable $attributes)
     {
