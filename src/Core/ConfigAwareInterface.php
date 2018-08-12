@@ -10,18 +10,18 @@ interface ConfigAwareInterface
 {
 
     /**
-     * @param \Runn\Core\Config $config
+     * @param \Runn\Core\Config|null $config
      * @return $this
      *
      * @7.1
      */
-    public function setConfig(/*?*/Config $config);
+    public function setConfig(?Config $config);
 
     /**
-     * @return \Runn\Core\Config
+     * @return \Runn\Core\Config|null
      *
      * @7.1
      */
-    public function getConfig(): /*?*/Config;
+    public function getConfig(): ?Config;
 
 }

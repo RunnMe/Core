@@ -19,27 +19,29 @@ trait HasSchemaTrait
     /*protected static $schema;*/
 
     /**
-     * @return array
+     * @return iterable
      *
      * @7.1
      */
-    public static function getSchema(): array/*iterable*/
+    public static function getSchema(): iterable
     {
         return static::$schema;
     }
 
     /**
-     * @param iterable $schema
+     * @param iterable|null $schema
      * @return array
      *
      * @7.1
      */
-    protected function prepareDataBySchema(/*iterable */$schema = [])
+    protected function prepareDataBySchema(iterable $schema = null)
     {
         $data = [];
-        foreach ($schema as $key => $def) {
-            $value = $this->prepareValueBySchemaDef($key, $def);
-            $data[$key] = $value;
+        if (null !== $schema) {
+            foreach ($schema as $key => $def) {
+                $value = $this->prepareValueBySchemaDef($key, $def);
+                $data[$key] = $value;
+            }
         }
         return $data;
     }
@@ -77,7 +79,7 @@ trait HasSchemaTrait
      *
      * @7.1
      */
-    public function fromSchema(/*iterable */$schema = [])
+    public function fromSchema(iterable $schema = null)
     {
         $data = $this->prepareDataBySchema($schema);
         $this->fromArray($data);

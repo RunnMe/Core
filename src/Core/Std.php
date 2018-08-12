@@ -61,7 +61,7 @@ class Std
      *
      * @7.1
      */
-    public function __construct(/* iterable */ $data = null)
+    public function __construct(iterable $data = null)
     {
         $errors = new Exceptions();
 

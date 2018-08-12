@@ -13,7 +13,7 @@ class ConfigAwareTraitTest extends \PHPUnit_Framework_TestCase
     {
         $obj = new class implements ConfigAwareInterface{ use ConfigAwareTrait; };
         // @7.1
-        //$this->assertNull($obj->getConfig());
+        $this->assertNull($obj->getConfig());
 
         $config = new Config(['foo' => 'bar']);
 
@@ -22,9 +22,9 @@ class ConfigAwareTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($obj, $ret);
 
         // @7.1
-        // $ret = $obj->setConfig(null);
-        // $this->assertNull($obj->getConfig());
-        // $this->assertSame($obj, $ret);
+        $ret = $obj->setConfig(null);
+        $this->assertNull($obj->getConfig());
+        $this->assertSame($obj, $ret);
     }
 
 }

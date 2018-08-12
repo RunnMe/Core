@@ -86,7 +86,7 @@ trait StdGetSetValidateSanitizeTrait
      *
      * @7.1
      */
-    public function merge(/* iterable */$data)
+    public function merge(iterable $data)
     {
         if ($data instanceof ArrayCastingInterface) {
             $data = $data->toArray();

@@ -27,7 +27,7 @@ class Exceptions
      *
      * @7.1
      */
-    public function __construct(/* iterable */$data = null)
+    public function __construct(iterable $data = null)
     {
         if (null !== $data) {
             $this->fromArray($data);

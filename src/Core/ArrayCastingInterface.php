@@ -18,7 +18,7 @@ interface ArrayCastingInterface
      *
      * @7.1
      */
-    public function fromArray(/* iterable */$data);
+    public function fromArray(iterable $data);
 
     /**
      * @param iterable $data
@@ -26,7 +26,7 @@ interface ArrayCastingInterface
      *
      * @7.1
      */
-    public function merge(/* iterable */$data);
+    public function merge(iterable $data);
 
     /**
      * @return array
