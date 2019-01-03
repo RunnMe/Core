@@ -1,6 +1,12 @@
-7.1.6, 7.2.6, 7.3.6
+7.2.7, 7.3.7, 7.4.7
+===================
+* Runn\Core\DateTime class is added
+
+7.2.6, 7.3.6, 7.4.6
 ===================
 * PHP 7.0 support is dropped
+* PHP 7.1 support is dropped
+* PHP 7.4 support is added
 
 7.0.5, 7.1.5, 7.2.5
 ===================
