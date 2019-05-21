@@ -2,7 +2,9 @@
 
 namespace Runn\tests\Core\Config;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\Config;
+use Runn\Core\Exception;
 use Runn\Core\StdGetSetInterface;
 use Runn\Core\HasInnerValidationInterface;
 use Runn\Core\HasInnerSanitizationInterface;
@@ -10,7 +12,8 @@ use Runn\Core\ObjectAsArrayInterface;
 use Runn\Core\Std;
 use Runn\Storages\SingleValueStorageInterface;
 
-class FakeStorage implements SingleValueStorageInterface {
+class FakeStorage implements SingleValueStorageInterface
+{
 
     protected $data;
 
@@ -31,7 +34,7 @@ class FakeStorage implements SingleValueStorageInterface {
     }
 }
 
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class ConfigTest extends TestCase
 {
 
     public function testConstructWData()
@@ -99,15 +102,13 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new FakeStorage(), $obj->getStorage());
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Empty config storage
-     */
     public function testLoadEmptyFile()
     {
         $obj = new Config();
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Empty config storage');
         $obj->load();
-        $this->fail();
     }
 
     public function testLoad()
@@ -137,24 +138,20 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new Config([1, 2, 3]), $obj->baz);
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     */
     public function testSet()
     {
         $config = new Config();
+
+        $this->expectException(\BadMethodCallException::class);
         $config->set(42);
-        $this->fail();
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     */
     public function testGet()
     {
         $config = new Config(new FakeStorage());
+
+        $this->expectException(\BadMethodCallException::class);
         $data = $config->get();
-        $this->fail();
     }
 
 }

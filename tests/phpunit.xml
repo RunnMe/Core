@@ -1,18 +1,18 @@
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.5/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/latest/phpunit.xsd"
         bootstrap="autoload.php"
 >
 
     <testsuites>
         <testsuite name="Runn\Core">
-            <directory phpVersionOperator=">=" phpVersion="7.1">Core</directory>
+            <directory phpVersionOperator=">=" phpVersion="7.2">Core</directory>
         </testsuite>
         <testsuite name="Runn\Di">
-            <directory phpVersionOperator=">=" phpVersion="7.1">Di</directory>
+            <directory phpVersionOperator=">=" phpVersion="7.2">Di</directory>
         </testsuite>
         <testsuite name="Runn\Reflection">
-            <directory phpVersionOperator=">=" phpVersion="7.1">Reflection</directory>
+            <directory phpVersionOperator=">=" phpVersion="7.2">Reflection</directory>
         </testsuite>
     </testsuites>
 

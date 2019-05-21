@@ -2,10 +2,11 @@
 
 namespace Runn\tests\Core\Collection;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\Collection;
 use Runn\Core\CollectionInterface;
 
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class CollectionTest extends TestCase
 {
 
     public function testConstruct()

@@ -2,17 +2,17 @@
 
 namespace Runn\tests\Core\StdGetSetTrait;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\StdGetSetInterface;
 use Runn\Core\ObjectAsArrayInterface;
 use Runn\Core\StdGetSetTrait;
 
-class testClass
-    implements ObjectAsArrayInterface, StdGetSetInterface
+class testClass implements ObjectAsArrayInterface, StdGetSetInterface
 {
     use StdGetSetTrait;
 }
 
-class StdGetSetTraitTest extends \PHPUnit_Framework_TestCase
+class StdGetSetTraitTest extends TestCase
 {
 
     public function testGetSetIssetUnset()

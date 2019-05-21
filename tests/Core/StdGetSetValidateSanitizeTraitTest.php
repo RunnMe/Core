@@ -2,6 +2,7 @@
 
 namespace Runn\tests\Core\StdGetSetValidateSanitizeTrait;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\Exception;
 use Runn\Core\StdGetSetInterface;
 use Runn\Core\HasInnerValidationInterface;
@@ -10,8 +11,7 @@ use Runn\Core\Exceptions;
 use Runn\Core\ObjectAsArrayInterface;
 use Runn\Core\StdGetSetValidateSanitizeTrait;
 
-class testClass
-    implements ObjectAsArrayInterface, StdGetSetInterface, HasInnerValidationInterface, HasInnerSanitizationInterface
+class testClass implements ObjectAsArrayInterface, StdGetSetInterface, HasInnerValidationInterface, HasInnerSanitizationInterface
 {
     use StdGetSetValidateSanitizeTrait;
 
@@ -42,7 +42,7 @@ class testClass
     }
 }
 
-class StdGetSetValidateSanitizeTraitTest extends \PHPUnit_Framework_TestCase
+class StdGetSetValidateSanitizeTraitTest extends TestCase
 {
 
     public function testNullKey()

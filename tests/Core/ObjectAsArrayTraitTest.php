@@ -2,25 +2,23 @@
 
 namespace Runn\tests\Core\ObjectAsArrayTrait;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\ArrayCastingInterface;
 use Runn\Core\HasInnerCastingInterface;
 use Runn\Core\ObjectAsArrayInterface;
 use Runn\Core\ObjectAsArrayTrait;
 
-class testClass
-    implements ObjectAsArrayInterface
+class testClass implements ObjectAsArrayInterface
 {
     use ObjectAsArrayTrait;
 }
 
-class testAnotherClass
-    implements ObjectAsArrayInterface
+class testAnotherClass implements ObjectAsArrayInterface
 {
     use ObjectAsArrayTrait;
 }
 
-class testWithGetterClass
-    implements ObjectAsArrayInterface
+class testWithGetterClass implements ObjectAsArrayInterface
 {
     use ObjectAsArrayTrait;
     protected function getFoo()
@@ -29,8 +27,7 @@ class testWithGetterClass
     }
 }
 
-class testWithGetterNotgetterClass
-    implements ObjectAsArrayInterface
+class testWithGetterNotgetterClass implements ObjectAsArrayInterface
 {
     use ObjectAsArrayTrait;
     protected function notgetters(): array { return['bar']; }
@@ -44,8 +41,7 @@ class testWithGetterNotgetterClass
     }
 }
 
-class testWithSetterClass
-    implements ObjectAsArrayInterface
+class testWithSetterClass implements ObjectAsArrayInterface
 {
     use ObjectAsArrayTrait;
     protected function setFoo($val)
@@ -54,8 +50,7 @@ class testWithSetterClass
     }
 }
 
-class testWithSetterNotsetterClass
-    implements ObjectAsArrayInterface
+class testWithSetterNotsetterClass implements ObjectAsArrayInterface
 {
     use ObjectAsArrayTrait;
     protected function notsetters(): array { return ['bar']; }
@@ -69,7 +64,7 @@ class testWithSetterNotsetterClass
     }
 }
 
-class ObjectAsArrayTraitTest extends \PHPUnit_Framework_TestCase
+class ObjectAsArrayTraitTest extends TestCase
 {
 
     public function testInterfaces()
@@ -367,7 +362,7 @@ class ObjectAsArrayTraitTest extends \PHPUnit_Framework_TestCase
         $obj = new testClass();
         $obj->fromArray([1=>100, 2=>200, 'foo'=>'bar']);
 
-        $this->assertContains('{a:3:{i:1;i:100;i:2;i:200;s:3:"foo";s:3:"bar";}', serialize($obj));
+        $this->assertStringContainsString('{a:3:{i:1;i:100;i:2;i:200;s:3:"foo";s:3:"bar";}', serialize($obj));
         $this->assertEquals($obj, unserialize(serialize($obj)));
     }
 

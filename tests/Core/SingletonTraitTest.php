@@ -2,16 +2,17 @@
 
 namespace Runn\tests\Core\SingletonTrait;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\SingletonInterface;
 use Runn\Core\SingletonTrait;
 
-class testClass1
-    implements SingletonInterface {
+class testClass1 implements SingletonInterface
+{
     use SingletonTrait;
 }
 
-class testClass2
-    implements SingletonInterface {
+class testClass2 implements SingletonInterface
+{
     use SingletonTrait;
     public $x;
     public $y;
@@ -22,7 +23,7 @@ class testClass2
     }
 }
 
-class SingletonTraitTest extends \PHPUnit_Framework_TestCase
+class SingletonTraitTest extends TestCase
 {
 
     public function testWoArguments()

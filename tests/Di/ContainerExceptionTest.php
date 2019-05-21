@@ -2,10 +2,11 @@
 
 namespace Runn\tests\Di\ContainerException;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 use Runn\Di\ContainerException;
 
-class ContainerExceptionTest extends \PHPUnit_Framework_TestCase
+class ContainerExceptionTest extends TestCase
 {
 
     public function testConstruct()

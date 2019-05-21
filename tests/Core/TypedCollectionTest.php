@@ -2,9 +2,11 @@
 
 namespace Runn\tests\Core\TypedCollection;
 
+use PHPUnit\Framework\TestCase;
+use Runn\Core\Exception;
 use Runn\Core\TypedCollection;
 
-class TypedCollectionTest extends \PHPUnit_Framework_TestCase
+class TypedCollectionTest extends TestCase
 {
 
     public function testConstructValid()
@@ -33,12 +35,10 @@ class TypedCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(42, $collection['type']->value);
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testConstructTypeMismatch()
     {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         $collection = new class(['foo' => 1, 'bar' => 2])
             extends TypedCollection {
                 public static function getType() { return \stdClass::class;}
