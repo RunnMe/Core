@@ -2,10 +2,13 @@
 
 namespace Runn\tests\Core\Config;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\Config;
+use Runn\Core\Exception;
 use Runn\Storages\SingleValueStorageInterface;
 
-class SimpleFileStorage implements SingleValueStorageInterface {
+class SimpleFileStorage implements SingleValueStorageInterface
+{
 
     protected $file;
     protected $data;
@@ -33,27 +36,25 @@ class SimpleFileStorage implements SingleValueStorageInterface {
     }
 }
 
-class ConfigSaveTest extends \PHPUnit_Framework_TestCase
+class ConfigSaveTest extends TestCase
 {
 
     const TMP_PATH = __DIR__ . '/tmp';
 
-    protected function setUp()
+    protected function setUp(): void
     {
         mkdir(self::TMP_PATH);
         file_put_contents(self::TMP_PATH . '/savetest.config', serialize(['application' => ['name' => 'Test Application']]));
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Empty config storage
-     */
     public function testEmptyStorageSave()
     {
         $config = new Config();
         $config->foo = 'bar';
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Empty config storage');
         $config->save();
-        $this->fail();
     }
 
     public function testSave()
@@ -74,7 +75,7 @@ class ConfigSaveTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unlink(self::TMP_PATH . '/savetest.config');
         rmdir(self::TMP_PATH);

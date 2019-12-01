@@ -2,6 +2,7 @@
 
 namespace Runn\tests\Core\Exceptions;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\Exception;
 use Runn\Core\CollectionInterface;
 use Runn\Core\Exceptions;
@@ -10,7 +11,7 @@ class SomeException extends Exception
 {
 }
 
-class ExceptionsTest extends \PHPUnit_Framework_TestCase
+class ExceptionsTest extends TestCase
 {
 
     public function testCreate()
@@ -38,12 +39,10 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testConstructInvalid()
     {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         $errors = new Exceptions([new \stdClass('First'), new \stdClass('Second')]);
     }
 
@@ -131,10 +130,6 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new Exception('Third'), $errors[2]);
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testInvalidClassPrepend()
     {
         $errors = new class extends Exceptions
@@ -144,13 +139,12 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
                 return SomeException::class;
             }
         };
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         $errors->prepend(new Exception);
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testInvalidClassAppend()
     {
         $errors = new class extends Exceptions
@@ -160,13 +154,12 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
                 return SomeException::class;
             }
         };
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         $errors->append(new Exception);
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testInvalidInnserSet()
     {
         $errors = new class extends Exceptions
@@ -176,6 +169,9 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
                 return SomeException::class;
             }
         };
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         $errors[] = new Exception;
     }
 

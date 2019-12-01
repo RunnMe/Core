@@ -2,9 +2,10 @@
 
 namespace Runn\tests\Core\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\Exception;
 
-class ExceptionTest extends \PHPUnit_Framework_TestCase
+class ExceptionTest extends TestCase
 {
 
     public function testJson()
