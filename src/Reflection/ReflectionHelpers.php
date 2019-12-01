@@ -43,8 +43,8 @@ class ReflectionHelpers
             if ($param->isOptional() && $param->isDefaultValueAvailable()) {
                 $args[$param->name]['default'] = $param->getDefaultValue();
             }
-            if ($param->hasType()) {
-                $args[$param->name]['type'] = (string)$param->getType();
+            if ($param->hasType() && $param->getType() instanceof \ReflectionNamedType) {
+                $args[$param->name]['type'] = $param->getType()->getName();
             }
         }
         $cache[$class][$method] = $args;

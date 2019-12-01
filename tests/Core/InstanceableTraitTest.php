@@ -2,11 +2,11 @@
 
 namespace Runn\tests\Core\InstanceableTrait;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\InstanceableInterface;
 use Runn\Core\InstanceableTrait;
 
-class testClass1
-    implements InstanceableInterface
+class testClass1 implements InstanceableInterface
 {
     use InstanceableTrait;
 
@@ -20,7 +20,7 @@ class testClass1
     }
 }
 
-class InstanceableTraitTest extends \PHPUnit_Framework_TestCase
+class InstanceableTraitTest extends TestCase
 {
 
     public function testWoArguments()

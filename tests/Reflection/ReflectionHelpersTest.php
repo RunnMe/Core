@@ -2,12 +2,13 @@
 
 namespace Runn\tests\Reflection\ReflectionHelpers;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\Exceptions;
 use Runn\Core\Std;
 use Runn\Reflection\Exception;
 use Runn\Reflection\ReflectionHelpers;
 
-class ReflectionHelpersTest extends \PHPUnit_Framework_TestCase
+class ReflectionHelpersTest extends TestCase
 {
 
     public function testGetClassMethodArgs()
@@ -48,7 +49,7 @@ class ReflectionHelpersTest extends \PHPUnit_Framework_TestCase
         };
 
         $args = ReflectionHelpers::getClassMethodArgs(get_class($object), 'foo');
-        $this->assertInternalType('array', $args);
+        $this->assertIsArray($args);
         $this->assertCount(4, $args);
         $this->assertSame('string', $args['arg1']['type']);
         $this->assertSame('int', $args['arg2']['type']);
@@ -69,7 +70,7 @@ class ReflectionHelpersTest extends \PHPUnit_Framework_TestCase
 
         $reflector = new \ReflectionMethod(ReflectionHelpers::class, 'getClassMethodArgs');
         $staticVariables = $reflector->getStaticVariables();
-        $this->assertInternalType('array', $staticVariables);
+        $this->assertIsArray($staticVariables);
         $this->assertCount(1, $staticVariables);
         $this->assertNotNull($staticVariables['cache']);
 
@@ -77,16 +78,14 @@ class ReflectionHelpersTest extends \PHPUnit_Framework_TestCase
         ReflectionHelpers::getClassMethodArgs(get_class($object2), 'getClassMethodArgs');
         $reflector = new \ReflectionMethod(ReflectionHelpers::class, 'getClassMethodArgs');
         $staticVariables = $reflector->getStaticVariables();
-        $this->assertInternalType('array', $staticVariables['cache']);
+        $this->assertIsArray($staticVariables['cache']);
         $this->assertNotNull($staticVariables['cache'][get_class($object)]['foo']);
         $this->assertNotNull($staticVariables['cache'][get_class($object2)]['getClassMethodArgs']);
     }
 
-    /**
-     * @expectedException \Runn\Reflection\Exception
-     */
     public function testGetObjectMethodInvalidObject()
     {
+        $this->expectException(Exception::class);
         $args = ReflectionHelpers::getObjectMethodArgs('', 'foo');
     }
 

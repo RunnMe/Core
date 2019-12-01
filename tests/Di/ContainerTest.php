@@ -2,38 +2,36 @@
 
 namespace Runn\tests\Di\Container;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\Std;
 use Runn\Di\Container;
 use Runn\Di\ContainerEntryNotFoundException;
 use Runn\Di\ContainerException;
 
-class ContainerTest extends \PHPUnit_Framework_TestCase
+class ContainerTest extends TestCase
 {
 
-    /**
-     * @expectedException \TypeError
-     */
     public function testSetInvalidArgument1()
     {
         $container = new Container();
+
+        $this->expectException(\TypeError::class);
         $container->set('id', 'foo');
     }
 
-    /**
-     * @expectedException \TypeError
-     */
     public function testSetInvalidArgument2()
     {
         $container = new Container();
+
+        $this->expectException(\TypeError::class);
         $container->id = 'foo';
     }
 
-    /**
-     * @expectedException \TypeError
-     */
     public function testSetInvalidArgument3()
     {
         $container = new Container();
+
+        $this->expectException(\TypeError::class);
         $container['id'] = 'foo';
     }
 

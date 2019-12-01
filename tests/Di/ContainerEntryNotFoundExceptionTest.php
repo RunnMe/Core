@@ -2,19 +2,18 @@
 
 namespace Runn\tests\Di\ContainerEntryNotFoundException;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 use Runn\Di\ContainerEntryNotFoundException;
 use Runn\Di\ContainerException;
 
-class ContainerEntryNotFoundExceptionTest extends \PHPUnit_Framework_TestCase
+class ContainerEntryNotFoundExceptionTest extends TestCase
 {
 
-    /**
-     * @expectedException \ArgumentCountError
-     */
     public function testEmptyConstruct()
     {
-        $exception = new ContainerEntryNotFoundException;
+        $this->expectException(\ArgumentCountError::class);
+        new ContainerEntryNotFoundException;
     }
 
     public function testConstruct()

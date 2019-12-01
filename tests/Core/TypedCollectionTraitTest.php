@@ -2,12 +2,12 @@
 
 namespace Runn\tests\Core\TypedCollectionTrait;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\Exception;
 use Runn\Core\TypedCollectionInterface;
 use Runn\Core\TypedCollectionTrait;
 
-class testClass
-    implements TypedCollectionInterface
+class testClass implements TypedCollectionInterface
 {
     use TypedCollectionTrait;
     public static function getType()
@@ -16,8 +16,7 @@ class testClass
     }
 }
 
-class testStrictClass
-    implements TypedCollectionInterface
+class testStrictClass implements TypedCollectionInterface
 {
     use TypedCollectionTrait;
     public static function getType()
@@ -32,8 +31,7 @@ class testStrictClass
     }
 }
 
-class testFloatClass
-    implements TypedCollectionInterface
+class testFloatClass implements TypedCollectionInterface
 {
     use TypedCollectionTrait;
     public static function getType()
@@ -42,8 +40,7 @@ class testFloatClass
     }
 }
 
-class testIntClass
-    implements TypedCollectionInterface
+class testIntClass implements TypedCollectionInterface
 {
     use TypedCollectionTrait;
     public static function getType()
@@ -52,8 +49,7 @@ class testIntClass
     }
 }
 
-class testBoolClass
-    implements TypedCollectionInterface
+class testBoolClass implements TypedCollectionInterface
 {
     use TypedCollectionTrait;
     public static function getType()
@@ -62,8 +58,7 @@ class testBoolClass
     }
 }
 
-class testIncorrectTypeClass
-    implements TypedCollectionInterface
+class testIncorrectTypeClass implements TypedCollectionInterface
 {
     use TypedCollectionTrait;
     public static function getType()
@@ -86,45 +81,40 @@ class testValueClass
 }
 
 
-class TypedCollectionTraitTest extends \PHPUnit_Framework_TestCase
+class TypedCollectionTraitTest extends TestCase
 {
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testInvalidFromArray()
     {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         (new testClass)->fromArray([1, 2, 3]);
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testInvalidAppend()
     {
         $collection = new testClass();
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         $collection->append(42);
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testInvalidPrepend()
     {
         $collection = new testClass();
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         $collection->prepend(new class {});
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testInvalidInnerSet()
     {
         $collection = new testClass();
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         $collection[] = new class {};
     }
 
@@ -156,23 +146,21 @@ class TypedCollectionTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $collection);
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testInvalidStrictType()
     {
         $this->assertSame(testValueClass::class, testStrictClass::getType());
-        $collection = (new testStrictClass)->fromArray([new class (1) extends testValueClass {}]);
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
+        (new testStrictClass)->fromArray([new class (1) extends testValueClass {}]);
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testInvalidIntegerClass()
     {
         $collection = new testClass();
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         $collection->append('42');
     }
 
@@ -193,13 +181,12 @@ class TypedCollectionTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(5, $collection);
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testInvalidFloatClass()
     {
         $collection = new testClass();
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         $collection->append(true);
     }
 
@@ -220,13 +207,12 @@ class TypedCollectionTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(5, $collection);
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testInvalidBooleanClass()
     {
         $collection = new testClass();
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         $collection->append('42');
     }
 
@@ -247,13 +233,12 @@ class TypedCollectionTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(5, $collection);
     }
 
-    /**
-     * @expectedException \Runn\Core\Exception
-     * @expectedExceptionMessage Typed collection type mismatch
-     */
     public function testIncorrectTypeClass()
     {
         $collection = new testIncorrectTypeClass();
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Typed collection type mismatch');
         $collection->append(42);
     }
 

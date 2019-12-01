@@ -2,12 +2,12 @@
 
 namespace Runn\tests\Core\CollectionTrait;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\CollectionInterface;
 use Runn\Core\ObjectAsArrayInterface;
 use Runn\Core\CollectionTrait;
 
-class testClass
-    implements CollectionInterface
+class testClass implements CollectionInterface
 {
     use CollectionTrait;
 }
@@ -25,7 +25,7 @@ class Number
     }
 }
 
-class CollectionTraitTest extends \PHPUnit_Framework_TestCase
+class CollectionTraitTest extends TestCase
 {
 
     public function testFromArray()

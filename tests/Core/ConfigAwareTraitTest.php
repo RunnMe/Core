@@ -2,11 +2,12 @@
 
 namespace Runn\tests\Core\ConfigAwareTrait;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\Config;
 use Runn\Core\ConfigAwareInterface;
 use Runn\Core\ConfigAwareTrait;
 
-class ConfigAwareTraitTest extends \PHPUnit_Framework_TestCase
+class ConfigAwareTraitTest extends TestCase
 {
 
     public function testTrait()

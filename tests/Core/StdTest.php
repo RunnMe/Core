@@ -2,6 +2,7 @@
 
 namespace Runn\tests\Core\Std;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\Exception;
 use Runn\Core\HasRequiredInterface;
 use Runn\Core\StdGetSetInterface;
@@ -11,7 +12,8 @@ use Runn\Core\Exceptions;
 use Runn\Core\ObjectAsArrayInterface;
 use Runn\Core\Std;
 
-class testClass extends Std {
+class testClass extends Std
+{
     protected function validateFoo($val) {
         return $val>0;
     }
@@ -23,7 +25,8 @@ class testClass extends Std {
     }
 }
 
-class testClassWExceptions extends Std {
+class testClassWExceptions extends Std
+{
     protected function validateFoo($val) {
         if ($val < 0) {
             throw new Exception('Minus');
@@ -47,14 +50,15 @@ class testClassWExceptions extends Std {
     }
 }
 
-class testClassWithRequired extends Std {
+class testClassWithRequired extends Std
+{
     protected static $required = ['foo', 'bar'];
     protected function validateBaz() {
         throw new Exception('Invalid baz');
     }
 }
 
-class StdTest extends \PHPUnit_Framework_TestCase
+class StdTest extends TestCase
 {
 
     public function testEmptyConstruct()

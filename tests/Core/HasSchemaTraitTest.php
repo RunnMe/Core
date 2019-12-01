@@ -2,13 +2,15 @@
 
 namespace Runn\tests\Core\HasSchemaTrait;
 
+use PHPUnit\Framework\TestCase;
 use Runn\Core\HasSchemaInterface;
 use Runn\Core\HasSchemaTrait;
 use Runn\Core\ObjectAsArrayInterface;
 use Runn\Core\ObjectAsArrayTrait;
 use Runn\Core\Std;
 
-class testConstructClass {
+class testConstructClass
+{
     public $foo, $bar;
     public function __construct($foo, $bar = 'bar')
     {
@@ -17,8 +19,7 @@ class testConstructClass {
     }
 }
 
-class testClass
-    implements ObjectAsArrayInterface, HasSchemaInterface
+class testClass implements ObjectAsArrayInterface, HasSchemaInterface
 {
     protected static $schema = [
         'x' => ['class' => Std::class, ['foo' => 'bar', 'baz' => 42]],
@@ -31,7 +32,7 @@ class testClass
     use HasSchemaTrait;
 }
 
-class HasSchemaTraitTest extends \PHPUnit_Framework_TestCase
+class HasSchemaTraitTest extends TestCase
 {
 
     public function testInterfaces()
