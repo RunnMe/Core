@@ -1,3 +1,7 @@
+7.2.9, 7.3.9, 7.4.9
+===================
+* Minor fix with `ReflectionType` 
+
 7.2.8, 7.3.8, 7.4.8
 ===================
 * Tests are using PHPUnit 8 framework now
