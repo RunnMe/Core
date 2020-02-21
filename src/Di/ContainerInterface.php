@@ -3,8 +3,16 @@
 namespace Runn\Di;
 
 use Psr\Container\ContainerInterface as PsrContainerInterface;
+use Runn\Core\ObjectAsArrayInterface;
+use Runn\Core\StdGetSetInterface;
 
-interface ContainerInterface extends PsrContainerInterface
+/**
+ * Extended PSR Container interface
+ *
+ * Interface ContainerInterface
+ * @package Runn\Di
+ */
+interface ContainerInterface extends PsrContainerInterface, ObjectAsArrayInterface, StdGetSetInterface
 {
 
     /**
