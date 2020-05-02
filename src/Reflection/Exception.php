@@ -2,6 +2,6 @@
 
 namespace Runn\Reflection;
 
-class Exception
-    extends \Runn\Core\Exception
-{}
+class Exception extends \Runn\Core\Exception
+{
+}

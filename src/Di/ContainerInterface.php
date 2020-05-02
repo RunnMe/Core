@@ -3,8 +3,16 @@
 namespace Runn\Di;
 
 use Psr\Container\ContainerInterface as PsrContainerInterface;
+use Runn\Core\ObjectAsArrayInterface;
+use Runn\Core\StdGetSetInterface;
 
-interface ContainerInterface extends PsrContainerInterface
+/**
+ * Extended PSR Container interface
+ *
+ * Interface ContainerInterface
+ * @package Runn\Di
+ */
+interface ContainerInterface extends PsrContainerInterface, ObjectAsArrayInterface, StdGetSetInterface
 {
 
     /**
@@ -15,7 +23,7 @@ interface ContainerInterface extends PsrContainerInterface
      *
      * @return $this
      */
-    public function set($id, callable $resolver);
+    public function set(string $id, callable $resolver);
 
     /**
      * Sets a resolver for entry of the container by its identifier as singleton.
@@ -25,6 +33,15 @@ interface ContainerInterface extends PsrContainerInterface
      *
      * @return $this.
      */
-    public function singleton($id, callable $resolver);
+    public function singleton(string $id, callable $resolver);
+
+    /**
+     * Resolves and returns an entry with all ones dependencies
+     * If $id is class name returns the $id class instance
+     *
+     * @param string $id
+     * @return mixed
+     */
+    public function resolve(string $id);
 
 }
