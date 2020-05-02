@@ -1,6 +1,7 @@
 7.2.10, 7.3.10, 7.4.10
 ======================
 * Container implementation refactoring 
+* `Container::resolve()` method is added
 
 7.2.9, 7.3.9, 7.4.9
 ===================

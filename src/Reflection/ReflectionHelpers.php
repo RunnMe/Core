@@ -20,7 +20,7 @@ class ReflectionHelpers
      * @return array
      * @throws \ReflectionException
      */
-    public static function getClassMethodArgs($class, string $method)
+    public static function getClassMethodArgs($class, string $method): array
     {
         static $cache = null;
 
@@ -59,7 +59,7 @@ class ReflectionHelpers
      * @return array
      * @throws \Runn\Reflection\Exception
      */
-    public static function getObjectMethodArgs($obj, string $method)
+    public static function getObjectMethodArgs($obj, string $method): array
     {
         if (!is_object($obj)) {
             throw new Exception('$obj is not an object');
@@ -73,7 +73,7 @@ class ReflectionHelpers
      * @return array
      * @throws \Runn\Core\Exceptions
      */
-    public static function prepareArgs(array $args, $data)
+    public static function prepareArgs(array $args, $data): array
     {
         $ret = [];
         $errors = new Exceptions;

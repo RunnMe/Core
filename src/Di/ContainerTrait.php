@@ -3,6 +3,7 @@
 namespace Runn\Di;
 
 use Runn\Core\StdGetSetTrait;
+use Runn\Reflection\ReflectionHelpers;
 
 /**
  * Extended Container interface default implementation
@@ -26,7 +27,7 @@ trait ContainerTrait /*implements ContainerInterface*/
      *
      * @return $this.
      */
-    public function set($id, callable $resolver)
+    public function set(string $id, callable $resolver)
     {
         $this->innerSet($id, $resolver);
         unset($this->resolved[$id]);
@@ -42,7 +43,7 @@ trait ContainerTrait /*implements ContainerInterface*/
      *
      * @return $this.
      */
-    public function singleton($id, callable $resolver)
+    public function singleton(string $id, callable $resolver)
     {
         $this->innerSet($id, $resolver);
         unset($this->resolved[$id]);
@@ -92,6 +93,58 @@ trait ContainerTrait /*implements ContainerInterface*/
     public function has($id)
     {
         return isset($this[$id]);
+    }
+
+    /**
+     * Resolves and returns an entry with all ones dependencies
+     *
+     * @param string $id
+     * @return mixed
+     * @throws ContainerEntryNotFoundException
+     * @throws ContainerException
+     */
+    public function resolve(string $id)
+    {
+        if ($this->has($id)) {
+            return $this->get($id);
+        }
+        // Check if $id is available class name
+        if (class_exists($id, true)) {
+
+            // Check if class has not constructor
+            if (!method_exists($id, '__construct')) {
+                $resolved = new $id;
+                $this->set($id, static function () use ($resolved) { return $resolved; } );
+                return $this->get($id);
+            }
+
+            // Check if constructor has not arguments
+            $constructArgs = ReflectionHelpers::getClassMethodArgs($id, '__construct');
+            if (empty($constructArgs)) {
+                $resolved = new $id;
+                $this->set($id, static function () use ($resolved) { return $resolved; } );
+                return $this->get($id);
+            }
+
+            $args = [];
+            foreach ($constructArgs as $neededArg) {
+                try {
+                    $args[] = $this->resolve($neededArg['type']);
+                } catch (ContainerEntryNotFoundException $e) {
+                    if ($neededArg['optional']) {
+                        $args[] = $neededArg['default'];
+                    } else {
+                        throw $e;
+                    }
+                }
+            }
+
+            $resolved = new $id(...$args);
+            $this->set($id, static function () use ($resolved) { return $resolved; } );
+            return $this->get($id);
+
+        }
+        throw new ContainerEntryNotFoundException($id);
     }
 
     /**

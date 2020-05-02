@@ -23,7 +23,7 @@ interface ContainerInterface extends PsrContainerInterface, ObjectAsArrayInterfa
      *
      * @return $this
      */
-    public function set($id, callable $resolver);
+    public function set(string $id, callable $resolver);
 
     /**
      * Sets a resolver for entry of the container by its identifier as singleton.
@@ -33,6 +33,15 @@ interface ContainerInterface extends PsrContainerInterface, ObjectAsArrayInterfa
      *
      * @return $this.
      */
-    public function singleton($id, callable $resolver);
+    public function singleton(string $id, callable $resolver);
+
+    /**
+     * Resolves and returns an entry with all ones dependencies
+     * If $id is class name returns the $id class instance
+     *
+     * @param string $id
+     * @return mixed
+     */
+    public function resolve(string $id);
 
 }
