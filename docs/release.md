@@ -1,3 +1,10 @@
+7.4.11, 8.0.11
+==============
+* PHP 7.2 support is dropped
+* PHP 7.3 support is dropped
+* PHP 8.0 support is added  
+* PSR Container compatibility fix
+
 7.2.10, 7.3.10, 7.4.10
 ======================
 * Container implementation refactoring 

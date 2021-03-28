@@ -2,6 +2,8 @@
 
 namespace Runn\Di;
 
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Runn\Core\StdGetSetTrait;
 use Runn\Reflection\ReflectionHelpers;
 
@@ -25,7 +27,7 @@ trait ContainerTrait /*implements ContainerInterface*/
      * @param string $id Identifier of the entry to look for.
      * @param callable $resolver Function that resolves the entry and returns it.
      *
-     * @return $this.
+     * @return $this
      */
     public function set(string $id, callable $resolver)
     {
@@ -56,12 +58,12 @@ trait ContainerTrait /*implements ContainerInterface*/
      *
      * @param string $id Identifier of the entry to look for.
      *
-     * @throws ContainerEntryNotFoundException No entry was found for **this** identifier.
-     * @throws ContainerException Error while retrieving the entry.
+     * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
+     * @throws ContainerExceptionInterface Error while retrieving the entry.
      *
      * @return mixed Entry.
      */
-    public function get($id)
+    public function get(string $id)
     {
         if (!$this->has($id)) {
             throw new ContainerEntryNotFoundException($id);
@@ -90,7 +92,7 @@ trait ContainerTrait /*implements ContainerInterface*/
      *
      * @return bool
      */
-    public function has($id)
+    public function has(string $id): bool
     {
         return isset($this[$id]);
     }
