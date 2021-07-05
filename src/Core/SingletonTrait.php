@@ -24,14 +24,7 @@ trait SingletonTrait
     /**
      * @codeCoverageIgnore
      */
-    private function __clone()
-    {
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    private function __wakeup()
+    protected function __clone()
     {
     }
 
