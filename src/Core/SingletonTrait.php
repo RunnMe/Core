@@ -29,13 +29,6 @@ trait SingletonTrait
     }
 
     /**
-     * @codeCoverageIgnore
-     */
-    private function __wakeup()
-    {
-    }
-
-    /**
      * @param array $args
      * @return static
      */
