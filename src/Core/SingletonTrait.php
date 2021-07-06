@@ -24,7 +24,7 @@ trait SingletonTrait
     /**
      * @codeCoverageIgnore
      */
-    private function __clone()
+    protected function __clone()
     {
     }
 
